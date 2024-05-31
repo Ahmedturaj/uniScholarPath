@@ -1,4 +1,6 @@
 import { Outlet, useLocation } from "react-router-dom";
+import NavBar from "../../Pages/Shared/Navbar/Navbar";
+import Footer from "../../Pages/Shared/Footer/Footer";
 
 const Main = () => {
     const location = useLocation();
@@ -7,11 +9,11 @@ const Main = () => {
     console.log(location.pathname);
     return (
         <div>
-            {noHeaderFooter || 'Navbar'}
+            {noHeaderFooter || <NavBar/>}
             <div className='pt-24 min-h-[calc(100vh-68px)]'>
                 <Outlet />
             </div>
-            {noHeaderFooter || 'Footer'}
+            {noHeaderFooter || <Footer/>}
         </div>
     );
 };

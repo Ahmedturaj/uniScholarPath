@@ -1,0 +1,4 @@
+.menu li a:active,
+.menu li a:focus {
+    color: blue !important;
+}
