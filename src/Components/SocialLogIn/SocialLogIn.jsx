@@ -3,8 +3,9 @@ import { ImSpinner9 } from "react-icons/im";
 import PropTypes from 'prop-types';
 import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
-import useAxiosCommon from "../../Hooks/useAxiosCommon";
 import { AuthContext } from "../../Provider/AuthProvider";
+import useAxiosCommon from "../../Hooks/Common/useAxiosCommon";
+
 
 const SocialLogIn = ({ title }) => {
     const { signInWithGoogle, loading } = useContext(AuthContext);
@@ -16,7 +17,7 @@ const SocialLogIn = ({ title }) => {
             const result = await signInWithGoogle();
             console.log(result);
             if (result) {
-                const usersInfo = { name: result.user.displayName, email: result.user.email }
+                const usersInfo = { name: result.user.displayName, email: result.user.email, photo:result.user.photoURL}
                 const { data: users } = await axiosCommon.post('/users', usersInfo)
                 if (users.insertedId) {
                     toast.success(`SignIn Successfully`);
@@ -34,7 +35,7 @@ const SocialLogIn = ({ title }) => {
         }
     }
     return (
-        <button onClick={handleGoogleLogIn} className="flex items-center justify-center mt-4 text-gray-600 transition-colors duration-300 transform border rounded-lg dark:border-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 m-auto">
+        <button onClick={handleGoogleLogIn} className="flex items-center justify-center mt-4  transition-colors duration-300 transform border rounded-lg  hover:bg-blue-700 bg-blue-600 m-auto text-white">
             {loading ? <ImSpinner9 className='animate-spin m-auto' /> : <>
                 <div className="px-4 py-2">
                     <svg className="w-6 h-6" viewBox="0 0 40 40">

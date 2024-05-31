@@ -1,9 +1,10 @@
 import { Link, NavLink } from "react-router-dom";
 import './nav.css'
 import logo from '../../../assets/logo.png'
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../Provider/AuthProvider";
 const NavBar = () => {
-    // const { user, logOut, loading } = useContext(AuthContext);
+    const { user, logOut, loading } = useContext(AuthContext);
     // const { isAdmin } = useAdmin();
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
     const [isChecked, setIsChecked] = useState(theme === "dark");
@@ -16,8 +17,6 @@ const NavBar = () => {
         setTheme(newTheme);
         setIsChecked(e.target.checked);
     }
-    const user = false;
-    const loading = false;
     const navOptions = <>
         <li><NavLink to={'/'} className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-r-2 border-blue-600 rounded-none'}>Home</NavLink></li>
         <li><NavLink to={'/all-scholarship'} className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>All ScholarShip</NavLink></li>
@@ -62,10 +61,10 @@ const NavBar = () => {
                         }
                         {
                             user ? <>
-                                <button className="p-1 cursor-pointer rounded md:btn lg:btn text-[#f2f2f2f2] md:text-[#f2f2f2f2] lg:text-[#f2f2f2f2] text-base md:text-xl bg-[hsl(112,43%,55%)] md:bg-[hsl(112,43%,55%)] lg:bg-[hsl(112,43%,55%)] hover:bg-[hsl(112,43%,55%)]">LogOut</button>
+                                <button onClick={logOut} className="p-1 cursor-pointer rounded md:btn lg:btn text-[#f2f2f2f2] md:text-[#f2f2f2f2] lg:text-[#f2f2f2f2]  bg-blue-600 md:bg-blue-600 lg:bg-blue-600 hover:bg-blue-600">LogOut</button>
                             </> :
                                 <>
-                                    <Link to={'/logIn'}>  <button className="p-1 cursor-pointer rounded md:btn lg:btn text-[#f2f2f2f2] md:text-[#f2f2f2f2] lg:text-[#f2f2f2f2] text-xs mr-2 ml-2 md:text-xl bg-[hsl(112,43%,55%)] md:bg-[hsl(112,43%,55%)] lg:bg-[hsl(112,43%,55%)] hover:bg-[hsl(112,43%,55%)]">SignIn</button></Link>
+                                    <Link to={'/signIn'}>  <button className="p-1 cursor-pointer rounded md:btn lg:btn text-[#f2f2f2f2] md:text-[#f2f2f2f2] lg:text-[#f2f2f2f2] text-xs mr-2 ml-2 md:text-xl bg-blue-600 md:bg-blue-600 lg:bg-blue-600 hover:bg-blue-600">SignIn</button></Link>
                                 </>
                         }
                     </div>}

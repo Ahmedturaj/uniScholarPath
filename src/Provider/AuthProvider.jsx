@@ -1,10 +1,8 @@
 import axios from "axios";
 import PropTypes from 'prop-types';
-import { createUserWithEmailAndPassword, onAuthStateChanged,GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
+import {  onAuthStateChanged,GoogleAuthProvider, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile, createUserWithEmailAndPassword } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import auth from "../firebase/firebase.config";
-
-
 
 export const AuthContext = createContext(null);
 const googleProvider = new GoogleAuthProvider()
