@@ -1,16 +1,20 @@
 import { useContext, useState } from "react";
 import { CgProfile } from "react-icons/cg";
-import { FaAd, FaBars, FaCalendar, FaEnvelope, FaHome, FaList, FaShoppingCart, FaUsers, } from "react-icons/fa";
+import { FaBars, FaEnvelope, FaHome, FaUsers, FaWpforms, } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
-import { MdFormatShapes, MdOutlinePreview } from "react-icons/md";
+import { MdFormatShapes, MdOutlinePreview, MdRateReview } from "react-icons/md";
 import { SiSemanticscholar } from "react-icons/si";
 import { NavLink, Outlet } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
+import useAdmin from "../../Hooks/useAdmin/useAdmin";
+import useModerator from "../../Hooks/useModerator/useModerator";
+import useStudent from "../../Hooks/useStudent/useStudent";
 
 const DashBoard = () => {
     const { user, logOut } = useContext(AuthContext);
-    const isAdmin = true;
-    const isModerator = false;
+    const { isAdmin } = useAdmin();
+    const { isModerator } = useModerator();
+    const { isStudent } = useStudent();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {
@@ -24,8 +28,8 @@ const DashBoard = () => {
                 className={`fixed top-0 left-0 w-64 min-h-screen bg-blue-700 text-white transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 lg:translate-x-0 lg:relative lg:flex-shrink-0`}
             >
                 <ul className="menu p-4">
-                    {isAdmin && <>
-                        <div className="flex  justify-center justify-start mb-4">
+                    {user && isAdmin && !isModerator && <>
+                        <div className="flex  justify-center  mb-4">
                             <img className="object-cover w-16 h-16 rounded-full" src={user?.photoURL} alt="" />
                         </div>
                         <li>
@@ -66,11 +70,14 @@ const DashBoard = () => {
                         </li>
                     </>}
 
-                    {isModerator && <>
+                    {user && !isAdmin && isModerator && <>
+                        <div className="flex  justify-center  mb-4">
+                            <img className="object-cover w-16 h-16 rounded-full" src={user?.photoURL} alt="" />
+                        </div>
                         <li>
                             <NavLink to="/dashboard/moderatorProfile" className="flex items-center">
                                 <CgProfile className="mr-2" />
-                                Admin Profile
+                                Profile
                             </NavLink>
                         </li>
                         <li>
@@ -99,35 +106,26 @@ const DashBoard = () => {
                         </li>
                     </>}
 
-                    {user && !isAdmin && !isModerator && <>
+                    {user && isStudent && !isAdmin && !isModerator && <>
+                        <div className="flex  justify-center  mb-4">
+                            <img className="object-cover w-16 h-16 rounded-full" src={user?.photoURL} alt="" />
+                        </div>
                         <li>
-                            <NavLink to="/dashboard/userHome" className="flex items-center">
-                                <FaHome className="mr-2" />
-                                User Home
+                            <NavLink to="/dashboard/my-profile" className="flex items-center">
+                                <CgProfile className="mr-2" />
+                                My Profile
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard/reservation" className="flex items-center">
-                                <FaCalendar className="mr-2" />
-                                Reservation
+                            <NavLink to="/dashboard/my-application" className="flex items-center">
+                            <FaWpforms />
+                                My Application
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/dashboard/cart" className="flex items-center">
-                                <FaShoppingCart className="mr-2" />
-                                My Cart
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/review" className="flex items-center">
-                                <FaAd className="mr-2" />
-                                Add a Review
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/paymentHistory" className="flex items-center">
-                                <FaList className="mr-2" />
-                                My Payment History
+                            <NavLink to="/dashboard/my-review" className="flex items-center">
+                                <MdRateReview />
+                                My Review
                             </NavLink>
                         </li>
                     </>}
@@ -156,7 +154,7 @@ const DashBoard = () => {
                 </div>
                 <Outlet></Outlet>
             </div>
-        </div>
+        </div >
     );
 };
 

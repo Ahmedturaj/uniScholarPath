@@ -10,7 +10,7 @@ const ManageUser = () => {
     const [filterRole, setFilterRole] = useState("");
 
     const handleRoleChange = (user, role) => {
-        axiosSecure.patch(`/users/admin/${user._id}`, { role })
+        axiosSecure.patch(`/users/role/${user._id}`, { role })
             .then(res => {
                 if (res.data.modifiedCount > 0) {
                     refetch();

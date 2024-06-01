@@ -21,7 +21,7 @@ function useAxiosSecure() {
                 if (error.response.status === 401 || error.response.status === 403) {
                     logOut()
                         .then(() => {
-                            navigate("/logIn");
+                            navigate("/signIn");
                         })
                         .catch((error) => console.error(error));
                 }

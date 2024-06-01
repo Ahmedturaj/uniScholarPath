@@ -11,6 +11,10 @@ import ManageScholarship from "../Pages/Dashboard/AdminAndModeratorDashboard/Man
 import ManageApplied from "../Pages/Dashboard/AdminAndModeratorDashboard/ManageApplied/ManageApplied";
 import ManageReview from "../Pages/Dashboard/AdminAndModeratorDashboard/Managereview/ManageReview";
 import ManageUser from "../Pages/Dashboard/AdminAndModeratorDashboard/ManageUser/ManageUser";
+import PrivateRoutes from "./PrivateRoutes";
+import MyProfile from "../Pages/Dashboard/StudentDashboard/MyProfile/MyProfile";
+import MyApplication from "../Pages/Dashboard/StudentDashboard/MyApplication/MyApplication";
+import MyReview from "../Pages/Dashboard/StudentDashboard/MyReview/MyReview";
 
 export const router = createBrowserRouter([
     {
@@ -34,7 +38,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashBoard></DashBoard>,
+        element: <PrivateRoutes><DashBoard></DashBoard></PrivateRoutes>,
         children: [
             // admin paths
             {
@@ -60,6 +64,19 @@ export const router = createBrowserRouter([
             {
                 path: 'manage-review',
                 element: <ManageReview></ManageReview>
+            },
+            // 
+            {
+                path: 'my-profile',
+                element: <MyProfile></MyProfile>
+            },
+            {
+                path: 'my-application',
+                element: <MyApplication></MyApplication>
+            },
+            {
+                path: 'my-review',
+                element: <MyReview></MyReview>
             }
         ]
     }

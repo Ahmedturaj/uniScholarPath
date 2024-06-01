@@ -113,7 +113,7 @@ function SignUp() {
                 <div className="flex items-center justify-between mt-4">
                     <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
 
-                    <Link to={'/logIn'} className="text-xs text-blue-500 uppercase  hover:underline">or sign up</Link>
+                    <Link to={'/signIn'} className="text-xs text-blue-500 uppercase  hover:underline">or sign up</Link>
 
                     <span className="w-1/5 border-b dark:border-gray-600 md:w-1/4"></span>
                 </div>
