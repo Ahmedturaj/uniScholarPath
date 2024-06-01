@@ -6,6 +6,9 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 const NavBar = () => {
     const { user, logOut, loading } = useContext(AuthContext);
     // const { isAdmin } = useAdmin();
+    const isAdmin = true;
+    const moderator = false;
+
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
     const [isChecked, setIsChecked] = useState(theme === "dark");
     useEffect(() => {
@@ -17,9 +20,19 @@ const NavBar = () => {
         setTheme(newTheme);
         setIsChecked(e.target.checked);
     }
+
     const navOptions = <>
         <li><NavLink to={'/'} className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-r-2 border-blue-600 rounded-none'}>Home</NavLink></li>
         <li><NavLink to={'/all-scholarship'} className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>All ScholarShip</NavLink></li>
+        {
+            user && isAdmin && <li><NavLink to="/dashboard/adminProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
+        }
+        {
+            user && !isAdmin && moderator && <li><NavLink to="/dashboard/moderatorProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
+        }
+        {
+            user && !isAdmin && !moderator && <li><NavLink to="/dashboard/userProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
+        }
 
     </>
 
