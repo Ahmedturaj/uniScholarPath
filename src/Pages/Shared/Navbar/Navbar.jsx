@@ -25,7 +25,7 @@ const NavBar = () => {
 
     return (
         <>
-            <div className="navbar fixed z-10 bg-opacity-30 max-w-screen-xl bg-black text-white">
+            <div className="navbar max-w-[1270px] mx-auto fixed z-10 bg-opacity-30  bg-black text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -35,9 +35,9 @@ const NavBar = () => {
                             {navOptions}
                         </ul>
                     </div>
-                    <Link to={'/'} className="btn btn-ghost normal-case md:text-xl gap-0">
+                    <Link to={'/'} className="btn btn-ghost normal-case md:text-xl text-xs -left-6 lg:-left-0 relative gap-0">
                         <img src={logo} alt="" className="w-5  md:w-8 mr-2 hover:animate-spin" />
-                        <span className="text-blue-600 md:text-2xl">U</span>ni<span className="text-blue-600 md:text-2xl">S</span>cholar<span className="text-blue-600 md:text-2xl">Path</span></Link>
+                        <span className="text-blue-600 md:text-2xl text-xs">U</span>ni<span className="text-blue-600 md:text-2xl text-xs">S</span>cholar<span className="text-blue-600 md:text-2xl text-xs">Path</span></Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -50,10 +50,10 @@ const NavBar = () => {
                         <svg className="col-start-1 row-start-1 stroke-base-100 fill-base-100" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="5" /><path d="M12 1v2M12 21v2M4.2 4.2l1.4 1.4M18.4 18.4l1.4 1.4M1 12h2M21 12h2M4.2 19.8l1.4-1.4M18.4 5.6l1.4-1.4" /></svg>
                         <svg className="col-start-2 row-start-1 stroke-base-100 fill-base-100" xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>
                     </label>
-                    {loading ? <progress className="progress w-40 md:w-56 bg-[hsl(112,43%,55%)]"></progress> : <div className="flex items-center">
+                    {loading ? <progress className="progress w-40 md:w-56 bg-blue-600"></progress> : <div className="flex items-center">
                         {
                             user &&
-                            <div tabIndex={0} role="button" className="btn btn-ghost w-8 md:w-12 lg:w-14 btn-circle avatar mr-5">
+                            <div tabIndex={0} role="button" className="btn btn-ghost w-6 md:w-12 lg:w-14 btn-circle avatar md:mr-5">
                                 <div className="w-10 rounded-full">
                                     <img alt={`picture of ${user.displayName}`} src={user.photoURL ? user.photoURL : 'https://i.ibb.co/Y36ZBDD/blank-avatar-photo-place-holder-600nw-1095249842.jpg'} title={user.displayName} />
                                 </div>
@@ -61,7 +61,7 @@ const NavBar = () => {
                         }
                         {
                             user ? <>
-                                <button onClick={logOut} className="p-1 cursor-pointer rounded md:btn lg:btn text-[#f2f2f2f2] md:text-[#f2f2f2f2] lg:text-[#f2f2f2f2]  bg-blue-600 md:bg-blue-600 lg:bg-blue-600 hover:bg-blue-600">LogOut</button>
+                                <button onClick={logOut} className="p-1 cursor-pointer rounded md:btn lg:btn text-[#f2f2f2f2] md:text-[#f2f2f2f2] lg:text-[#f2f2f2f2]  bg-blue-600 md:bg-blue-600 lg:bg-blue-600 hover:bg-blue-600 text-xs md:text-base">LogOut</button>
                             </> :
                                 <>
                                     <Link to={'/signIn'}>  <button className="p-1 cursor-pointer rounded md:btn lg:btn text-[#f2f2f2f2] md:text-[#f2f2f2f2] lg:text-[#f2f2f2f2] text-xs mr-2 ml-2 md:text-xl bg-blue-600 md:bg-blue-600 lg:bg-blue-600 hover:bg-blue-600">SignIn</button></Link>

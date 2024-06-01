@@ -1,12 +1,13 @@
 import PageTitle from "../../../Components/PageTitle/PageTitle";
+import Banner from "../Banner/Banner";
 
 
 const Home = () => {
     return (
-        <div>
+        <section>
             <PageTitle title={'Home'}></PageTitle>
-            <h2 className="text-2xl">hello is that me you looking for</h2>
-        </div>
+            <div className="relative -top-[96px] md:-top-[250px] lg:-top-[99px]"> <Banner></Banner></div>
+        </section>
     );
 };
 
