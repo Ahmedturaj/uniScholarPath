@@ -50,7 +50,7 @@ function SignUp() {
 
             await createUser(email, password);
             await updateUserProfile(name, data.data.display_url);
-            const usersInfo = { name: name, email: email, photo: data.data.display_url };
+            const usersInfo = { name: name, email: email, photo: data.data.display_url, role:'user'};
             const { data: users } = await axiosCommon.post('/users', usersInfo);
             if (users.insertedId) {
                 navigate('/');
