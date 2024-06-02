@@ -6,27 +6,46 @@ import PageTitle from "../../../../Components/PageTitle/PageTitle";
 import useScolarship from "../../../../Hooks/useScolarship/useScolarship";
 import { ImSpinner9 } from 'react-icons/im';
 import useAxiosSecure from '../../../../Hooks/useAxiosSecure/useAxiosSecure';
+import Swal from 'sweetalert2';
 
 const ManageScholarship = () => {
     const { scholarships, refetch } = useScolarship();
     const [selectedScholarship, setSelectedScholarship] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
+    const [isViewing, setIsViewing] = useState(false);
     const [loading, setLoading] = useState(false);
     const [imagePreview, setImagePreview] = useState();
     const axiossecure = useAxiosSecure();
+
     const handleEdit = (scholarship) => {
         setSelectedScholarship(scholarship);
         setIsEditing(true);
     };
 
-    const handleDelete = async (id) => {
-        try {
-            await axios.delete(`/scholarships/${id}`);
-            refetch();
-            toast.success('Scholarship deleted successfully');
-        } catch (error) {
-            toast.error('Failed to delete scholarship');
-        }
+    const handleDelete = (id) => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                axiossecure.delete(`/scholarships/${id}`)
+                .then(res => {
+                    if (res.data.deletedCount > 0) {
+                        refetch();
+                        Swal.fire({
+                            title: "Deleted!",
+                            text: "Your Scholarship has been deleted.",
+                            icon: "success"
+                        });
+                    }
+                })
+            }
+        });
     };
 
     const handleSave = async (e) => {
@@ -76,6 +95,11 @@ const ManageScholarship = () => {
         setImagePreview(URL.createObjectURL(image));
     };
 
+    const handleViewDetails = (scholarship) => {
+        setSelectedScholarship(scholarship);
+        setIsViewing(true);
+    };
+
     return (
         <div className="max-w-7xl mx-auto p-4">
             <PageTitle title={'Manage Scholarships'} />
@@ -101,7 +125,7 @@ const ManageScholarship = () => {
                                 <td className="py-2 px-4 border-b">{scholarship.degree}</td>
                                 <td className="py-2 px-4 border-b">{scholarship.applicationFees}</td>
                                 <td className="py-2 px-4 border-b flex space-x-2">
-                                    <button className="btn btn-info">
+                                    <button className="btn btn-info" onClick={() => handleViewDetails(scholarship)}>
                                         <FaInfoCircle />
                                     </button>
                                     <button className="btn btn-warning" onClick={() => handleEdit(scholarship)}>
@@ -119,10 +143,10 @@ const ManageScholarship = () => {
 
             {/* Edit Modal */}
             {isEditing && selectedScholarship && (
-                <div className="absolute max-h-screen inset-0 flex  items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
-                    <div className="bg-white  p-6 rounded shadow-lg mx-auto">
+                <div className="absolute max-h-screen inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
+                    <div className="bg-white p-6 rounded shadow-lg mx-auto">
                         <h2 className="text-2xl font-bold mb-4">Edit Scholarship</h2>
-                        <form className=' h-[600px]' onSubmit={handleSave}>
+                        <form className='h-[600px]' onSubmit={handleSave}>
                             <div className="grid grid-cols-2 gap-4">
                                 <div>
                                     <label className="block mb-2">Scholarship Name</label>
@@ -195,6 +219,37 @@ const ManageScholarship = () => {
                                 <button type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>Cancel</button>
                             </div>
                         </form>
+                    </div>
+                </div>
+            )}
+
+            {/* Details Modal */}
+            {isViewing && selectedScholarship && (
+                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
+                    <div className="bg-white p-6 rounded shadow-lg mx-auto">
+                        <h2 className="text-2xl font-bold mb-4">Scholarship Details</h2>
+                        <div>
+                            <p><strong>Scholarship Name:</strong> {selectedScholarship.scholarshipName}</p>
+                            <p><strong>University Name:</strong> {selectedScholarship.universityName}</p>
+                            <p><strong>University Country:</strong> {selectedScholarship.universityCountry}</p>
+                            <p><strong>University City:</strong> {selectedScholarship.universityCity}</p>
+                            <p><strong>University World Rank:</strong> {selectedScholarship.universityRank}</p>
+                            <p><strong>Subject Category:</strong> {selectedScholarship.subjectCategory}</p>
+                            <p><strong>Scholarship Category:</strong> {selectedScholarship.scholarshipCategory}</p>
+                            <p><strong>Applied Degree:</strong> {selectedScholarship.degree}</p>
+                            <p><strong>Tuition Fees:</strong> {selectedScholarship.tuitionFees}</p>
+                            <p><strong>Application Fees:</strong> {selectedScholarship.applicationFees}</p>
+                            <p><strong>Service Charge:</strong> {selectedScholarship.serviceCharge}</p>
+                            {selectedScholarship.universityLogo && (
+                                <div>
+                                    <strong>University Logo:</strong>
+                                    <img className="h-12 mt-2" src={selectedScholarship.universityLogo} alt="University Logo" />
+                                </div>
+                            )}
+                        </div>
+                        <div className="mt-4 flex justify-end">
+                            <button type="button" className="btn btn-secondary" onClick={() => setIsViewing(false)}>Close</button>
+                        </div>
                     </div>
                 </div>
             )}
