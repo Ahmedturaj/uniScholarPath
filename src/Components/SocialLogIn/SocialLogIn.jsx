@@ -17,7 +17,7 @@ const SocialLogIn = ({ title }) => {
             const result = await signInWithGoogle();
             console.log(result);
             if (result) {
-                const usersInfo = { name: result.user.displayName, email: result.user.email, photo:result.user.photoURL}
+                const usersInfo = { name: result.user.displayName, email: result.user.email, photo:result.user.photoURL, role:'user'}
                 const { data: users } = await axiosCommon.post('/users', usersInfo)
                 if (users.insertedId) {
                     toast.success(`SignIn Successfully`);
