@@ -1,6 +1,8 @@
+import { Link } from "react-router-dom";
 import PageTitle from "../../../Components/PageTitle/PageTitle";
 import Banner from "../Banner/Banner";
 import TopScholarships from "../TopScholarships/TopScholarships";
+import { FaEye } from "react-icons/fa6";
 
 
 const Home = () => {
@@ -16,6 +18,9 @@ const Home = () => {
                 </div>
                 <div className="max-w-6xl mx-auto">
                     <TopScholarships></TopScholarships>
+                    <Link className="flex items-center justify-center" to={'/all-scholarship'}>
+                    <button className="flex gap-2 items-center justify-center border-t-2 rounded-es-xl rounded-se-xl border-blue-500 border-b-2 py-3 text-center w-80 font-bold text-blue-500 bg-black bg-opacity-15 cursor-pointer"><FaEye/> View All Scholarship</button>
+                    </Link>
                 </div>
             </div>
         </section>
