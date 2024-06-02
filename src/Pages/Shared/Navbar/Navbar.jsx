@@ -24,16 +24,16 @@ const NavBar = () => {
     }
 
     const navOptions = <>
-        <li><NavLink to={'/'} className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-r-2 border-blue-600 rounded-none'}>Home</NavLink></li>
-        <li><NavLink to={'/all-scholarship'} className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>All ScholarShip</NavLink></li>
+        <li><NavLink to={'/'} className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-white hover:border-t-2 hover:border-r-2 border-blue-600 rounded-none'}>Home</NavLink></li>
+        <li><NavLink to={'/all-scholarship'} className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-white hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>All ScholarShip</NavLink></li>
         {
-            user && !isStudent && !isModerator && isAdmin && <li><NavLink to="/dashboard/adminProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
+            user && !isStudent && !isModerator && isAdmin && <li><NavLink to="/dashboard/adminProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-white hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
         }
         {
-            user && !isAdmin && !isStudent && isModerator && <li><NavLink to="/dashboard/moderatorProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
+            user && !isAdmin && !isStudent && isModerator && <li><NavLink to="/dashboard/moderatorProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-white hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
         }
         {
-            user && !isAdmin && !isModerator && isStudent && <li><NavLink to="/dashboard/my-profile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
+            user && !isAdmin && !isModerator && isStudent && <li><NavLink to="/dashboard/my-profile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-white hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
         }
 
     </>

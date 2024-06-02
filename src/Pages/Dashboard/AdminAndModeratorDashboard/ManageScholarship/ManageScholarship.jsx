@@ -54,6 +54,7 @@ const ManageScholarship = () => {
         const form = e.target;
         const updatedScholarship = {
             ...selectedScholarship,
+            postDate: new Date().toLocaleString(),
             scholarshipName: form.scholarshipName.value,
             universityName: form.universityName.value,
             universityCountry: form.universityCountry.value,

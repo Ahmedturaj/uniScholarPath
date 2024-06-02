@@ -63,6 +63,7 @@ const AddScholarship = () => {
             applicationFees,
             serviceCharge,
             applicationDeadline: dates.endDate,
+            applicationstart: dates.startDate,
             postDate: new Date(),
             postedUserEmail,
             universityLogo: image_url,
