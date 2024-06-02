@@ -3,12 +3,14 @@ import './nav.css'
 import logo from '../../../assets/logo.png'
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import useAdmin from "../../../Hooks/useAdmin/useAdmin";
+import useModerator from "../../../Hooks/useModerator/useModerator";
+import useStudent from "../../../Hooks/useStudent/useStudent";
 const NavBar = () => {
     const { user, logOut, loading } = useContext(AuthContext);
-    // const { isAdmin } = useAdmin();
-    const isAdmin = true;
-    const moderator = false;
-
+    const { isAdmin } = useAdmin();
+    const { isModerator } = useModerator();
+    const { isStudent } = useStudent()
     const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
     const [isChecked, setIsChecked] = useState(theme === "dark");
     useEffect(() => {
@@ -25,13 +27,13 @@ const NavBar = () => {
         <li><NavLink to={'/'} className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-r-2 border-blue-600 rounded-none'}>Home</NavLink></li>
         <li><NavLink to={'/all-scholarship'} className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>All ScholarShip</NavLink></li>
         {
-            user && isAdmin && <li><NavLink to="/dashboard/adminProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
+            user && !isStudent && !isModerator && isAdmin && <li><NavLink to="/dashboard/adminProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
         }
         {
-            user && !isAdmin && moderator && <li><NavLink to="/dashboard/moderatorProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
+            user && !isAdmin && !isStudent && isModerator && <li><NavLink to="/dashboard/moderatorProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
         }
         {
-            user && !isAdmin && !moderator && <li><NavLink to="/dashboard/userProfile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
+            user && !isAdmin && !isModerator && isStudent && <li><NavLink to="/dashboard/my-profile" className={({ isActive }) => isActive ? 'text-blue-600 border-b-2 border-blue-600 rounded-none' : 'text-neutral-content hover:border-t-2 hover:border-l-2 border-blue-600 rounded-none'}>Dashboard</NavLink></li>
         }
 
     </>

@@ -15,6 +15,7 @@ import PrivateRoutes from "./PrivateRoutes";
 import MyProfile from "../Pages/Dashboard/StudentDashboard/MyProfile/MyProfile";
 import MyApplication from "../Pages/Dashboard/StudentDashboard/MyApplication/MyApplication";
 import MyReview from "../Pages/Dashboard/StudentDashboard/MyReview/MyReview";
+import ModeratorProfile from "../Pages/Dashboard/AdminAndModeratorDashboard/ModeratorProfile/ModeratorProfile";
 
 export const router = createBrowserRouter([
     {
@@ -65,7 +66,14 @@ export const router = createBrowserRouter([
                 path: 'manage-review',
                 element: <ManageReview></ManageReview>
             },
-            // 
+
+            // moderator
+            {
+                path:'moderatorProfile',
+                element:<ModeratorProfile></ModeratorProfile>
+            },
+
+            // student
             {
                 path: 'my-profile',
                 element: <MyProfile></MyProfile>
