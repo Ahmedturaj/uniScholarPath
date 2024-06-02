@@ -10,8 +10,10 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { AuthContext } from '../../../../Provider/AuthProvider';
 import PageTitle from '../../../../Components/PageTitle/PageTitle';
 import { ImSpinner9 } from 'react-icons/im';
+import useAxiosSecure from '../../../../Hooks/useAxiosSecure/useAxiosSecure';
 
 const AddScholarship = () => {
+    const axiosSecure = useAxiosSecure();
     const navigate = useNavigate();
     const [loading, setLoading] = useState(false);
     const { user } = useContext(AuthContext);
@@ -23,25 +25,14 @@ const AddScholarship = () => {
         key: 'selection',
     });
 
-    //   const { mutateAsync } = useMutation({
-    //     mutationFn: async (scholarshipData) => {
-    //       const { data } = await axios.post('/scholarships', scholarshipData);
-    //       return data;
-    //     },
-    //     onSuccess: () => {
-    //       toast.success('Scholarship Added Successfully!');
-    //       navigate('/dashboard/scholarships');
-    //       setLoading(false);
-    //     },
-    //   });
 
     const handleDates = (item) => {
         setDates(item.selection);
     };
 
     const handleSubmit = async (e) => {
+        setLoading(true)
         e.preventDefault();
-        setLoading(true);
         const form = e.target;
         const scholarshipName = form.scholarshipName.value;
         const universityName = form.universityName.value;
@@ -57,27 +48,51 @@ const AddScholarship = () => {
         const postedUserEmail = form.postedUserEmail.value;
         const image = form.image.files[0];
 
-        
-            const image_url = await uploadImage(image);
-            const scholarshipData = {
-                scholarshipName,
-                universityName,
-                universityCountry,
-                universityCity,
-                universityRank,
-                subjectCategory,
-                scholarshipCategory,
-                degree,
-                tuitionFees,
-                applicationFees,
-                serviceCharge,
-                applicationDeadline: dates.endDate,
-                postDate: new Date(),
-                postedUserEmail,
-                universityLogo: image_url,
-            };
-            console.table(scholarshipData);
-            setLoading(false);
+
+        const image_url = await uploadImage(image);
+        const scholarshipData = {
+            scholarshipName,
+            universityName,
+            universityCountry,
+            universityCity,
+            universityRank,
+            subjectCategory,
+            scholarshipCategory,
+            degree,
+            tuitionFees,
+            applicationFees,
+            serviceCharge,
+            applicationDeadline: dates.endDate,
+            postDate: new Date(),
+            postedUserEmail,
+            universityLogo: image_url,
+        };
+        setLoading(false)
+        if (universityRank < 0) {
+            return toast.error('please enter a valid rank')
+        }
+        if (applicationFees < 0) {
+            return toast.error('please enter a valid fees')
+        }
+        if (serviceCharge < 0) {
+            return toast.error('please enter a valid serviceCharge')
+        }
+        if (tuitionFees < -1) {
+            return toast.error('please enter a valid tuitionFees')
+
+        }
+
+
+        // sending data to server
+        const { data } = await axiosSecure.post('/scholarships', scholarshipData)
+        if (data.insertedId) {
+            toast.success('Scholarship have added.')
+            setImageText('Upload Image');
+            setImagePreview('')
+            navigate('/dashboard/manage-scholarship')
+            form.reset();
+        }
+
     };
 
     const uploadImage = async (image) => {
@@ -121,26 +136,29 @@ const AddScholarship = () => {
                         </div>
                         <div>
                             <label className="block mb-2">Subject Category</label>
-                            <select name="subjectCategory" className="select select-bordered w-full">
-                                <option>Agriculture</option>
-                                <option>Engineering</option>
-                                <option>Doctor</option>
+                            <select name="subjectCategory" className="select select-bordered w-full" required>
+                                <option value="" disabled selected>Select category</option>
+                                <option value="Agriculture">Agriculture</option>
+                                <option value="Engineering">Engineering</option>
+                                <option value="Doctor">Doctor</option>
                             </select>
                         </div>
                         <div>
                             <label className="block mb-2">Scholarship Category</label>
-                            <select name="scholarshipCategory" className="select select-bordered w-full">
-                                <option>Full fund</option>
-                                <option>Partial</option>
-                                <option>Self-fund</option>
+                            <select name="scholarshipCategory" className="select select-bordered w-full" required>
+                                <option value="" disabled selected>Select category</option>
+                                <option value="Full fund">Full fund</option>
+                                <option value="Partial">Partial</option>
+                                <option value="Self-fund">Self-fund</option>
                             </select>
                         </div>
                         <div>
                             <label className="block mb-2">Degree</label>
-                            <select name="degree" className="select select-bordered w-full">
-                                <option>Diploma</option>
-                                <option>Bachelor</option>
-                                <option>Masters</option>
+                            <select name="degree" className="select select-bordered w-full" required>
+                                <option value="" disabled selected>Select degree</option>
+                                <option value="Diploma">Diploma</option>
+                                <option value="Bachelor">Bachelor</option>
+                                <option value="Masters">Masters</option>
                             </select>
                         </div>
                         <div>
@@ -155,9 +173,10 @@ const AddScholarship = () => {
                             <label className="block mb-2">Service Charge</label>
                             <input type="number" name="serviceCharge" className="input input-bordered w-full" required />
                         </div>
-                        <div>
+                        <div className=''>
                             <label className="block mb-2">Application Deadline</label>
                             <DateRange
+                                rangeColors={['blue']}
                                 editableDateInputs={true}
                                 onChange={handleDates}
                                 moveRangeOnFirstSelection={false}
@@ -176,8 +195,8 @@ const AddScholarship = () => {
                         </div>
                     </div>
                     <div className="mt-4">
-                        <button type="submit" className="btn btn-primary" disabled={loading}>
-                            {loading ? <ImSpinner9 className='animate-spin m-auto' /> : 'Submit'}
+                        <button type="submit" className="btn btn-block btn-primary" disabled={loading}>
+                            {loading ? <ImSpinner9 className='animate-spin m-auto' /> : 'Add Scholarship'}
                         </button>
                     </div>
                 </form>
