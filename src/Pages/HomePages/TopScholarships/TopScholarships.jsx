@@ -19,10 +19,10 @@ const TopScholarships = () => {
         .slice(0, 6);
 
     return (
-        <div className="grid my-24 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid my-24 grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-2">
             {sortedScholarships.length > 0 ? (
                 sortedScholarships.map(scholarship => (
-                    <div key={scholarship._id} className="max-w-xs overflow-hidden bg-blue-200 bg-opacity-55 rounded-lg shadow-lg">
+                    <div key={scholarship._id} className="md:max-w-xs overflow-hidden bg-blue-200 bg-opacity-55 rounded-lg  shadow-lg">
                         <div className="px-4 py-2 text-black">
                             <h1 className="text-xl font-bold uppercase">{scholarship.scholarshipName}</h1>
                             <p className="mt-1 text-sm">{scholarship.universityName}</p>

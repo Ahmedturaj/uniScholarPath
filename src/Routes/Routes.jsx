@@ -16,11 +16,13 @@ import MyProfile from "../Pages/Dashboard/StudentDashboard/MyProfile/MyProfile";
 import MyApplication from "../Pages/Dashboard/StudentDashboard/MyApplication/MyApplication";
 import MyReview from "../Pages/Dashboard/StudentDashboard/MyReview/MyReview";
 import ModeratorProfile from "../Pages/Dashboard/AdminAndModeratorDashboard/ModeratorProfile/ModeratorProfile";
+import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
+        errorElement:<ErrorPage></ErrorPage>,
         children: [
             { path: '/', element: <Home></Home> },
             {
@@ -40,6 +42,7 @@ export const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoutes><DashBoard></DashBoard></PrivateRoutes>,
+        errorElement:<ErrorPage></ErrorPage>,
         children: [
             // admin paths
             {
