@@ -148,7 +148,7 @@ const AddScholarship = () => {
                             <label className="block mb-2">Scholarship Category</label>
                             <select name="scholarshipCategory" className="select select-bordered w-full" required>
                                 <option value="" disabled selected>Select category</option>
-                                <option value="Full fund">Full fund</option>
+                                <option value="Full-fund">Full fund</option>
                                 <option value="Partial">Partial</option>
                                 <option value="Self-fund">Self-fund</option>
                             </select>

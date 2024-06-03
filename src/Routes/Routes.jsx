@@ -17,17 +17,28 @@ import MyApplication from "../Pages/Dashboard/StudentDashboard/MyApplication/MyA
 import MyReview from "../Pages/Dashboard/StudentDashboard/MyReview/MyReview";
 import ModeratorProfile from "../Pages/Dashboard/AdminAndModeratorDashboard/ModeratorProfile/ModeratorProfile";
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
+import ViewDetail from "../Pages/ViewDetail/ViewDetail";
+import Payment from "../Pages/Payment/Payment";
 
 export const router = createBrowserRouter([
     {
         path: '/',
         element: <Main></Main>,
-        errorElement:<ErrorPage></ErrorPage>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             { path: '/', element: <Home></Home> },
             {
                 path: '/all-scholarship',
                 element: <AllScholarship></AllScholarship>
+            },
+            {
+                path: '/detail/:id',
+                element: <PrivateRoutes><ViewDetail></ViewDetail></PrivateRoutes>,
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/scholarships/${params.id}`, { credentials: 'include' })
+            },
+            {
+                path:'/payment/:id',
+                element:<Payment></Payment>
             },
             {
                 path: '/signIn',
@@ -42,7 +53,7 @@ export const router = createBrowserRouter([
     {
         path: '/dashboard',
         element: <PrivateRoutes><DashBoard></DashBoard></PrivateRoutes>,
-        errorElement:<ErrorPage></ErrorPage>,
+        errorElement: <ErrorPage></ErrorPage>,
         children: [
             // admin paths
             {
@@ -72,8 +83,8 @@ export const router = createBrowserRouter([
 
             // moderator
             {
-                path:'moderatorProfile',
-                element:<ModeratorProfile></ModeratorProfile>
+                path: 'moderatorProfile',
+                element: <ModeratorProfile></ModeratorProfile>
             },
 
             // student

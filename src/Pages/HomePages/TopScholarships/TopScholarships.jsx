@@ -1,5 +1,6 @@
 import { FaDollarSign, FaRankingStar } from "react-icons/fa6";
 import useScolarship from "../../../Hooks/useScolarship/useScolarship";
+import { Link } from "react-router-dom";
 
 const TopScholarships = () => {
     const { scholarships } = useScolarship();
@@ -53,9 +54,9 @@ const TopScholarships = () => {
                         <img className="object-cover w-full h-48 mt-2" src={scholarship.universityLogo} alt="University Logo" />
                         <div className="flex gap-2 items-center justify-between px-4 py-2 bg-gray-900">
                             <h1 className="text-lg font-bold text-white">Application Fees: ${scholarship.applicationFees}</h1>
-                            <button className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">
+                            <Link to={`/detail/${scholarship._id}`} className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">
                                 Details
-                            </button>
+                            </Link>
                         </div>
                     </div>
                 ))

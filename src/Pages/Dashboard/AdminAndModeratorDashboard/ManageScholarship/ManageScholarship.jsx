@@ -182,8 +182,8 @@ const ManageScholarship = () => {
                                     <label className="block mb-2">Scholarship Category</label>
                                     <select name="scholarshipCategory" defaultValue={selectedScholarship.scholarshipCategory} className="select select-bordered w-full">
                                         <option value="">Select Scholarship Category</option>
-                                        <option value="Full">Full</option>
-                                        <option value="Half">Half</option>
+                                        <option value="Full-fund">Full-fund</option>
+                                        <option value="Self-fund">Self-fund</option>
                                         <option value="Partial">Partial</option>
                                     </select>
                                 </div>
