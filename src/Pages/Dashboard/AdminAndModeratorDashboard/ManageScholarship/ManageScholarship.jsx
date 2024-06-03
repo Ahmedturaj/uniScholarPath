@@ -106,7 +106,7 @@ const ManageScholarship = () => {
             <PageTitle title={'Manage Scholarships'} />
             <h2 className="text-2xl font-bold mb-4">All Scholarships</h2>
             <div className="overflow-x-auto">
-                <table className="min-w-full bg-white border">
+                <table className="min-w-full  border">
                     <thead>
                         <tr>
                             <th className="py-2 px-4 border-b">Scholarship Name</th>

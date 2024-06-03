@@ -6,6 +6,7 @@ import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
 import { Cell, Legend, Pie, PieChart } from "recharts";
 import PageTitle from "../../Components/PageTitle/PageTitle";
+import CheckoutForm from "./CheckoutForm";
 
 // todo
 const stripePromise = loadStripe(import.meta.env.VITE_PAYMENT_GATEWAY_PK);
@@ -58,6 +59,11 @@ const Payment = () => {
     return (
         <div>
             <PageTitle title={'Payment'}></PageTitle>
+            <div className="flex items-center justify-center w-full">
+                <h2 className="text-2xl border-t-2 rounded-es-xl rounded-se-xl border-blue-500 border-b-2 py-3 text-center w-80 font-extrabold text-blue-500 bg-black bg-opacity-15">
+                    Payment for {paymentData.scholarshipName}
+                </h2>
+            </div>
             <div className=" flex items-center md:justify-between gap-2 flex-col md:flex-row">
                 <div className="">
                     <h2 className="text-xl">Total Price: ${totalFees}</h2>
@@ -83,8 +89,7 @@ const Payment = () => {
                 </div>
             </div>
             <Elements stripe={stripePromise}>
-                {/* Add your CheckoutForm component here */}
-                CheckoutForm
+                <CheckoutForm paymentData={paymentData} totalFees={totalFees} />
             </Elements>
         </div>
     );

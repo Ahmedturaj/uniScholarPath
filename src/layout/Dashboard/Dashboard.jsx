@@ -25,7 +25,7 @@ const DashBoard = () => {
         <div className="flex">
             {/* Sidebar */}
             <div
-                className={`fixed top-0 left-0 w-64 min-h-screen bg-blue-700 text-white transform ${isSidebarOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform duration-300 lg:translate-x-0 lg:relative lg:flex-shrink-0`}
+                className={`fixed top-0 left-0 w-64 min-h-screen bg-blue-700 text-white transform ${isSidebarOpen ? 'translate-x-0 z-50' : '-translate-x-full'} transition-transform duration-300 lg:translate-x-0 lg:relative lg:flex-shrink-0`}
             >
                 <ul className="menu p-4">
                     {user && isAdmin && !isModerator && <>

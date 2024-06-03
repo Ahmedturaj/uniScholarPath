@@ -19,6 +19,7 @@ import ModeratorProfile from "../Pages/Dashboard/AdminAndModeratorDashboard/Mode
 import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ViewDetail from "../Pages/ViewDetail/ViewDetail";
 import Payment from "../Pages/Payment/Payment";
+import ScholarshipApplication from "../Pages/ScholarshipApplication/ScholarshipApplication";
 
 export const router = createBrowserRouter([
     {
@@ -37,8 +38,12 @@ export const router = createBrowserRouter([
                 loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/scholarships/${params.id}`, { credentials: 'include' })
             },
             {
-                path:'/payment/:id',
-                element:<Payment></Payment>
+                path: '/payment/:id',
+                element: <PrivateRoutes><Payment></Payment></PrivateRoutes>
+            },
+            {
+                path: '/scholarship-application/:id',
+                element: <ScholarshipApplication></ScholarshipApplication>
             },
             {
                 path: '/signIn',
