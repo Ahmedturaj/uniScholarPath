@@ -9,7 +9,7 @@ import { Link, useLoaderData } from "react-router-dom";
 const ViewDetail = () => {
     const data = useLoaderData();
     console.log(data);
-    const { universityName, universityLogo, universityCountry, universityCity, tuitionFees, subjectCategory, serviceCharge, _id, scholarshipName, scholarshipCategory, postDate, degree, applicationstar, applicationFees, applicationDeadline, } = data;
+    const { universityName, universityLogo, universityCountry, universityCity, tuitionFees, subjectCategory, serviceCharge, _id, scholarshipName, scholarshipCategory, postDate, degree, applicationstart, applicationFees, applicationDeadline, } = data;
 
     const tuitionFeesFloat = parseFloat(tuitionFees) || 0;
     const serviceChargeFloat = parseFloat(serviceCharge) || 0;
@@ -53,7 +53,7 @@ const ViewDetail = () => {
                         {tuitionFees !== 0 ? <p className="flex text-gray-400 items-center justify-center gap-2"><span className="text-blue-400">TuitionFees:</span>{tuitionFees} <RiEmotionHappyFill /></p> : <p className="flex text-gray-400 items-center justify-center gap-2"><span className="text-blue-400">TuitionFees:</span>Full Funded <ImHappy2 /></p>}
                     </div>
                     <div className="flex gap-3 items-center">
-                        <p className="flex items-center justify-center gap-2 text-gray-400"><span className="text-blue-400">Application Start:</span>{formatDate(applicationstar)} <FaHourglassStart /></p>
+                        <p className="flex items-center justify-center gap-2 text-gray-400"><span className="text-blue-400">Application Start:</span>{formatDate(applicationstart)} <FaHourglassStart /></p>
                         <p className="flex text-gray-400 items-center justify-center gap-2"><span className="text-blue-400">Application Deadline:</span>{formatDate(applicationDeadline)} <FaHourglassEnd /></p>
                     </div>
                     <div className="flex gap-3 items-center">
