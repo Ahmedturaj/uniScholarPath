@@ -45,10 +45,10 @@ const DashBoard = () => {
     };
 
     return (
-        <div className="flex">
+        <div className="flex min-h-full">
             {/* Sidebar */}
             <div
-                className={`fixed top-0 left-0 w-64 min-h-screen bg-blue-700 text-white transform ${isSidebarOpen ? 'translate-x-0 z-50' : '-translate-x-full'} transition-transform duration-300 lg:translate-x-0 lg:relative lg:flex-shrink-0`}
+                className={`fixed top-0 left-0 w-64 min-h-full md:min-h-screen bg-blue-700 text-white transform ${isSidebarOpen ? 'translate-x-0 z-50' : '-translate-x-full'} transition-transform duration-300 lg:translate-x-0 lg:relative lg:flex-shrink-0`}
             >
                 <ul className="menu p-4">
                     {isAdminLoading || isModeratorLoading || isStudentLoading ? (
@@ -181,7 +181,7 @@ const DashBoard = () => {
             </div>
 
             {/* Dashboard content */}
-            <div className="flex-1 p-8">
+            <div className="flex-1 p-8 min-h-full md:min-h-screen">
                 <div className="lg:hidden fixed top-0 right-0 p-4 z-10">
                     <button onClick={toggleSidebar}>
                         <FaBars size={24} />

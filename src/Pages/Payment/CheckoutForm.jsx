@@ -62,7 +62,6 @@ const CheckoutForm = ({ totalFees, paymentData }) => {
         } else {
             if (paymentIntent.status === "succeeded") {
                 setTransactionId(paymentIntent.id)
-                toast.success(`You TransactionId :${transactionId}`)
                 navigate(`/scholarship-application/${_id}`);
             }
         }
@@ -90,6 +89,7 @@ const CheckoutForm = ({ totalFees, paymentData }) => {
                 <button className="btn my-5 btn-primary" type="submit" disabled={!stripe || !clientSecret}>
                     Pay
                 </button>
+                <p className='text-2xl text-blue-400 text-center'>{transactionId}</p>
             </form>
         </div>
     );

@@ -11,15 +11,13 @@ import Swal from 'sweetalert2';
 const ManageScholarship = () => {
     const { scholarships, refetch, isScholarshipLoading } = useScolarship();
     const [selectedScholarship, setSelectedScholarship] = useState(null);
-    const [isEditing, setIsEditing] = useState(false);
-    const [isViewing, setIsViewing] = useState(false);
     const [loading, setLoading] = useState(false);
     const [imagePreview, setImagePreview] = useState();
     const axiosSecure = useAxiosSecure();
 
     const handleEdit = (scholarship) => {
         setSelectedScholarship(scholarship);
-        setIsEditing(true);
+        document.getElementById('edit_modal').showModal();
     };
 
     const handleDelete = (id) => {
@@ -43,7 +41,7 @@ const ManageScholarship = () => {
                                 icon: "success"
                             });
                         }
-                    })
+                    });
             }
         });
     };
@@ -76,7 +74,7 @@ const ManageScholarship = () => {
             await axiosSecure.patch(`/scholarships/${selectedScholarship._id}`, updatedScholarship);
             refetch();
             toast.success('Scholarship updated successfully');
-            setIsEditing(false);
+            document.getElementById('edit_modal').close();
             setSelectedScholarship(null);
         } catch (error) {
             toast.error('Failed to update scholarship');
@@ -98,17 +96,19 @@ const ManageScholarship = () => {
 
     const handleViewDetails = (scholarship) => {
         setSelectedScholarship(scholarship);
-        setIsViewing(true);
+        document.getElementById('view_modal').showModal();
     };
+
     if (isScholarshipLoading) {
         return <ImSpinner9 className='animate-spin text-b m-auto' />
     }
+
     return (
         <div className="max-w-7xl mx-auto p-4">
             <PageTitle title={'Manage Scholarships'} />
             <h2 className="text-2xl font-bold mb-4">All Scholarships</h2>
             <div className="overflow-x-auto">
-                <table className="min-w-full  border">
+                <table className="min-w-full border">
                     <thead>
                         <tr>
                             <th className="py-2 px-4 border-b">Scholarship Name</th>
@@ -145,92 +145,96 @@ const ManageScholarship = () => {
             </div>
 
             {/* Edit Modal */}
-            {isEditing && selectedScholarship && (
-                <div className="absolute max-h-screen inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50 overflow-y-auto">
-                    <div className="bg-white p-6 rounded shadow-lg mx-auto">
-                        <h2 className="text-2xl font-bold mb-4">Edit Scholarship</h2>
-                        <form className='h-[600px]' onSubmit={handleSave}>
-                            <div className="grid grid-cols-2 gap-4">
-                                <div>
-                                    <label className="block mb-2">Scholarship Name</label>
-                                    <input type="text" name="scholarshipName" defaultValue={selectedScholarship.scholarshipName} className="input input-bordered w-full" required />
-                                </div>
-                                <div>
-                                    <label className="block mb-2">University Name</label>
-                                    <input type="text" name="universityName" defaultValue={selectedScholarship.universityName} className="input input-bordered w-full" required />
-                                </div>
-                                <div>
-                                    <label className="block mb-2">University Country</label>
-                                    <input type="text" name="universityCountry" defaultValue={selectedScholarship.universityCountry} className="input input-bordered w-full" required />
-                                </div>
-                                <div>
-                                    <label className="block mb-2">University City</label>
-                                    <input type="text" name="universityCity" defaultValue={selectedScholarship.universityCity} className="input input-bordered w-full" required />
-                                </div>
-                                <div>
-                                    <label className="block mb-2">University World Rank</label>
-                                    <input type="number" name="universityRank" defaultValue={selectedScholarship.universityRank} className="input input-bordered w-full" required />
-                                </div>
-                                <div>
-                                    <label className="block mb-2">Subject Category</label>
-                                    <select name="subjectCategory" defaultValue={selectedScholarship.subjectCategory} className="select select-bordered w-full">
-                                        <option value="">Select Subject Category</option>
-                                        <option value="Agriculture">Agriculture</option>
-                                        <option value="Engineering">Engineering</option>
-                                        <option value="Doctor">Doctor</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="block mb-2">Scholarship Category</label>
-                                    <select name="scholarshipCategory" defaultValue={selectedScholarship.scholarshipCategory} className="select select-bordered w-full">
-                                        <option value="">Select Scholarship Category</option>
-                                        <option value="Full-fund">Full-fund</option>
-                                        <option value="Self-fund">Self-fund</option>
-                                        <option value="Partial">Partial</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="block mb-2">Applied Degree</label>
-                                    <select name="degree" defaultValue={selectedScholarship.degree} className="select select-bordered w-full">
-                                        <option value="Diploma">Diploma</option>
-                                        <option value="Engineering">Engineering</option>
-                                        <option value="Masters">Masters</option>
-                                    </select>
-                                </div>
-                                <div>
-                                    <label className="block mb-2">Tuition Fees</label>
-                                    <input type="number" name="tuitionFees" defaultValue={selectedScholarship.tuitionFees} className="input input-bordered w-full" required />
-                                </div>
-                                <div>
-                                    <label className="block mb-2">Application Fees</label>
-                                    <input type="number" name="applicationFees" defaultValue={selectedScholarship.applicationFees} className="input input-bordered w-full" required />
-                                </div>
-                                <div>
-                                    <label className="block mb-2">Service Charge</label>
-                                    <input type="number" name="serviceCharge" defaultValue={selectedScholarship.serviceCharge} className="input input-bordered w-full" required />
-                                </div>
-                                <div>
-                                    <label className="block mb-2">University Logo</label>
-                                    <input type="file" name="image" className="file-input file-input-bordered w-full" onChange={(e) => handleImage(e.target.files[0])} />
-                                    {imagePreview && <img className='h-12 mt-2' src={imagePreview} alt="Selected" />}
-                                </div>
+            <dialog id="edit_modal" className="modal">
+                <div className="modal-box">
+                    <form method="dialog" className="absolute right-2 top-2">
+                        <button className="btn btn-sm btn-circle btn-ghost">✕</button>
+                    </form>
+                    <h2 className="text-2xl font-bold mb-4">Edit Scholarship</h2>
+                    <form className="h-[600px]" onSubmit={handleSave}>
+                        <div className="grid grid-cols-2 gap-4">
+                            <div>
+                                <label className="block mb-2">Scholarship Name</label>
+                                <input type="text" name="scholarshipName" defaultValue={selectedScholarship?.scholarshipName} className="input input-bordered w-full" required />
                             </div>
-                            <div className="mt-4 flex justify-end space-x-2">
-                                <button type="submit" className="btn btn-primary" disabled={loading}>
-                                    {loading ? <ImSpinner9 className="animate-spin m-auto" /> : 'Save'}
-                                </button>
-                                <button type="button" className="btn btn-secondary" onClick={() => setIsEditing(false)}>Cancel</button>
+                            <div>
+                                <label className="block mb-2">University Name</label>
+                                <input type="text" name="universityName" defaultValue={selectedScholarship?.universityName} className="input input-bordered w-full" required />
                             </div>
-                        </form>
-                    </div>
+                            <div>
+                                <label className="block mb-2">University Country</label>
+                                <input type="text" name="universityCountry" defaultValue={selectedScholarship?.universityCountry} className="input input-bordered w-full" required />
+                            </div>
+                            <div>
+                                <label className="block mb-2">University City</label>
+                                <input type="text" name="universityCity" defaultValue={selectedScholarship?.universityCity} className="input input-bordered w-full" required />
+                            </div>
+                            <div>
+                                <label className="block mb-2">University World Rank</label>
+                                <input type="number" name="universityRank" defaultValue={selectedScholarship?.universityRank} className="input input-bordered w-full" required />
+                            </div>
+                            <div>
+                                <label className="block mb-2">Subject Category</label>
+                                <select name="subjectCategory" defaultValue={selectedScholarship?.subjectCategory} className="select select-bordered w-full">
+                                    <option value="">Select Subject Category</option>
+                                    <option value="Agriculture">Agriculture</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Doctor">Doctor</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block mb-2">Scholarship Category</label>
+                                <select name="scholarshipCategory" defaultValue={selectedScholarship?.scholarshipCategory} className="select select-bordered w-full">
+                                    <option value="">Select Scholarship Category</option>
+                                    <option value="Full-fund">Full-fund</option>
+                                    <option value="Self-fund">Self-fund</option>
+                                    <option value="Partial">Partial</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block mb-2">Applied Degree</label>
+                                <select name="degree" defaultValue={selectedScholarship?.degree} className="select select-bordered w-full">
+                                    <option value="Diploma">Diploma</option>
+                                    <option value="Engineering">Engineering</option>
+                                    <option value="Masters">Masters</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label className="block mb-2">Tuition Fees</label>
+                                <input type="number" name="tuitionFees" defaultValue={selectedScholarship?.tuitionFees} className="input input-bordered w-full" required />
+                            </div>
+                            <div>
+                                <label className="block mb-2">Application Fees</label>
+                                <input type="number" name="applicationFees" defaultValue={selectedScholarship?.applicationFees} className="input input-bordered w-full" required />
+                            </div>
+                            <div>
+                                <label className="block mb-2">Service Charge</label>
+                                <input type="number" name="serviceCharge" defaultValue={selectedScholarship?.serviceCharge} className="input input-bordered w-full" required />
+                            </div>
+                            <div>
+                                <label className="block mb-2">University Logo</label>
+                                <input type="file" name="image" className="file-input file-input-bordered w-full" onChange={(e) => handleImage(e.target.files[0])} />
+                                {imagePreview && <img className="h-12 mt-2" src={imagePreview} alt="Selected" />}
+                            </div>
+                        </div>
+                        <div className="mt-4 flex justify-end space-x-2">
+                            <button type="submit" className="btn btn-primary" disabled={loading}>
+                                {loading ? <ImSpinner9 className="animate-spin m-auto" /> : 'Save'}
+                            </button>
+                            <button type="button" className="btn btn-secondary" onClick={() => document.getElementById('edit_modal').close()}>Cancel</button>
+                        </div>
+                    </form>
                 </div>
-            )}
+            </dialog>
 
             {/* Details Modal */}
-            {isViewing && selectedScholarship && (
-                <div className="absolute inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
-                    <div className="bg-white p-6 rounded shadow-lg mx-auto">
-                        <h2 className="text-2xl font-bold mb-4">Scholarship Details</h2>
+            <dialog id="view_modal" className="modal">
+                <div className="modal-box">
+                    <form method="dialog" className="absolute right-2 top-2">
+                        <button className="btn btn-sm btn-circle btn-ghost">✕</button>
+                    </form>
+                    <h2 className="text-2xl font-bold mb-4">Scholarship Details</h2>
+                    {selectedScholarship && (
                         <div>
                             <p><strong>Scholarship Name:</strong> {selectedScholarship.scholarshipName}</p>
                             <p><strong>University Name:</strong> {selectedScholarship.universityName}</p>
@@ -250,12 +254,12 @@ const ManageScholarship = () => {
                                 </div>
                             )}
                         </div>
-                        <div className="mt-4 flex justify-end">
-                            <button type="button" className="btn btn-secondary" onClick={() => setIsViewing(false)}>Close</button>
-                        </div>
+                    )}
+                    <div className="mt-4 flex justify-end">
+                        <button type="button" className="btn btn-secondary" onClick={() => document.getElementById('view_modal').close()}>Close</button>
                     </div>
                 </div>
-            )}
+            </dialog>
         </div>
     );
 };

@@ -68,7 +68,7 @@ const AppliedTable = ({ scholarship, refetch }) => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axiosSecure.patch(`/applied-scholarships/${id}`, { confirmationStatus: 'rejected' });
+                    await axiosSecure.put(`/applied-scholarships/${id}`, { confirmationStatus: 'rejected' });
                     refetch()
                     Swal.fire({
                         title: "Cancelled!",
@@ -89,7 +89,6 @@ const AppliedTable = ({ scholarship, refetch }) => {
         try {
             await axiosSecure.patch(`/applied-scholarships/${id}`, {
                 feedback,
-                confirmationStatus: 'completed'
             });
             refetch()
             Swal.fire({
@@ -98,6 +97,26 @@ const AppliedTable = ({ scholarship, refetch }) => {
                 icon: 'success',
             });
             closeFeedbackModal();
+        } catch (error) {
+            Swal.fire({
+                title: 'Error!',
+                text: 'Something went wrong. Please try again.',
+                icon: 'error',
+            });
+        }
+    };
+
+    const handleStatus = async (id, confirmationStatus) => {
+        try {
+            await axiosSecure.put(`/applied-scholarships-status/${id}`, {
+                confirmationStatus
+            });
+            refetch()
+            Swal.fire({
+                title: 'Status Submitted!',
+                text: 'Your feedback has been successfully submitted.',
+                icon: 'success',
+            });
         } catch (error) {
             Swal.fire({
                 title: 'Error!',
@@ -117,9 +136,18 @@ const AppliedTable = ({ scholarship, refetch }) => {
                 <td className="px-4 py-4 text-sm font-medium  whitespace-nowrap">{applicationFees}</td>
                 <td className="px-4 py-4 text-sm font-medium  whitespace-nowrap">{serviceCharge}</td>
                 <td className="px-4 py-4 text-sm font-medium  whitespace-nowrap">
-                    <div className={`inline-flex items-center px-3 py-1 rounded-full gap-x-2 ${confirmationStatus === 'pending' ? 'bg-yellow-100' : confirmationStatus === 'processing' ? 'bg-blue-100' : 'bg-green-100'}`}>
-                        <span className={`h-1.5 w-1.5 rounded-full ${confirmationStatus === 'pending' ? 'bg-yellow-500' : confirmationStatus === 'processing' ? 'bg-blue-500' : 'bg-green-500'}`}></span>
-                        <h2 className={`text-sm font-normal ${confirmationStatus === 'pending' ? 'text-yellow-500' : confirmationStatus === 'processing' ? 'text-blue-500' : 'text-green-500'}`}>{confirmationStatus}</h2>
+                    <div>
+
+                        {confirmationStatus == 'rejected' ? < h2 className=' text-center rounded-full bg-red-300 text-red-500'>rejected</h2> : <>
+                            <label className="block mb-2">Confirmation Status</label>
+                            <select name="confirmationStatus" value={confirmationStatus}
+                                onChange={(e) => handleStatus(_id, e.target.value)}
+                                className="select select-bordered w-full">
+                                <option value="pending">Pending</option>
+                                <option value="processing">Processing</option>
+                                <option value="completed">Completed</option>
+                            </select>
+                        </>}
                     </div>
                 </td>
                 <td className="px-4 py-4 text-sm whitespace-nowrap">
@@ -135,7 +163,7 @@ const AppliedTable = ({ scholarship, refetch }) => {
                         </button>
                     </div>
                 </td>
-            </tr>
+            </tr >
 
             {isModalOpen && (
                 <dialog id="scholarship_modal" className="modal">
@@ -165,32 +193,35 @@ const AppliedTable = ({ scholarship, refetch }) => {
                             <p><strong>Applying Degree:</strong> {applyingDegree}</p>
                             <p><strong>SSC Result:</strong> {sscResult}</p>
                             <p><strong>HSC Result:</strong> {hscResult}</p>
-                            <p><strong>Study Gap:</strong> {studyGap}</p>
+                            {studyGap != '' && <p><strong>Study Gap:</strong> {studyGap}</p>}
                         </div>
                     </div>
                 </dialog>
-            )}
+            )
+            }
 
-            {isFeedbackModalOpen && (
-                <dialog id="feedback_modal" className="modal">
-                    <div className="modal-box">
-                        <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeFeedbackModal}>✕</button>
-                        <h3 className="font-bold text-lg">Provide Feedback</h3>
-                        <div className="py-4">
-                            <textarea
-                                className="w-full p-2 border border-gray-300 rounded-md"
-                                rows="5"
-                                placeholder="Enter your feedback here..."
-                                value={feedback}
-                                onChange={handleFeedbackChange}
-                            ></textarea>
+            {
+                isFeedbackModalOpen && (
+                    <dialog id="feedback_modal" className="modal">
+                        <div className="modal-box">
+                            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeFeedbackModal}>✕</button>
+                            <h3 className="font-bold text-lg">Provide Feedback</h3>
+                            <div className="py-4">
+                                <textarea
+                                    className="w-full p-2 border border-gray-300 rounded-md"
+                                    rows="5"
+                                    placeholder="Enter your feedback here..."
+                                    value={feedback}
+                                    onChange={handleFeedbackChange}
+                                ></textarea>
+                            </div>
+                            <div className="modal-action">
+                                <button className="btn btn-primary" onClick={() => handleFeedbackSubmit(_id)}>Submit Feedback</button>
+                            </div>
                         </div>
-                        <div className="modal-action">
-                            <button className="btn btn-primary" onClick={() => handleFeedbackSubmit(_id)}>Submit Feedback</button>
-                        </div>
-                    </div>
-                </dialog>
-            )}
+                    </dialog>
+                )
+            }
         </>
     );
 };
