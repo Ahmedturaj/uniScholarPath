@@ -10,11 +10,34 @@ import useAdmin from "../../Hooks/useAdmin/useAdmin";
 import useModerator from "../../Hooks/useModerator/useModerator";
 import useStudent from "../../Hooks/useStudent/useStudent";
 
+const SkeletonItem = () => (
+    <div className="animate-pulse flex space-x-4 mb-4">
+        <div className="rounded-full bg-gray-200 h-16 w-16"></div>
+        <div className="flex-1 space-y-4 py-1">
+            <div className="h-4 bg-gray-200 rounded w-3/4"></div>
+            <div className="space-y-2">
+                <div className="h-4 bg-gray-200 rounded"></div>
+                <div className="h-4 bg-gray-200 rounded w-5/6"></div>
+            </div>
+        </div>
+    </div>
+);
+
+const SkeletonMenu = () => (
+    <div className="space-y-4">
+        <SkeletonItem />
+        <SkeletonItem />
+        <SkeletonItem />
+        <SkeletonItem />
+        <SkeletonItem />
+    </div>
+);
+
 const DashBoard = () => {
     const { user, logOut } = useContext(AuthContext);
-    const { isAdmin } = useAdmin();
-    const { isModerator } = useModerator();
-    const { isStudent } = useStudent();
+    const { isAdmin, isAdminLoading } = useAdmin();
+    const { isModerator, isModeratorLoading } = useModerator();
+    const { isStudent, isStudentLoading } = useStudent();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {
@@ -28,107 +51,119 @@ const DashBoard = () => {
                 className={`fixed top-0 left-0 w-64 min-h-screen bg-blue-700 text-white transform ${isSidebarOpen ? 'translate-x-0 z-50' : '-translate-x-full'} transition-transform duration-300 lg:translate-x-0 lg:relative lg:flex-shrink-0`}
             >
                 <ul className="menu p-4">
-                    {user && isAdmin && !isModerator && <>
-                        <div className="flex  justify-center  mb-4">
-                            <img className="object-cover w-16 h-16 rounded-full" src={user?.photoURL} alt="" />
-                        </div>
-                        <li>
-                            <NavLink to="/dashboard/adminProfile" className="flex items-center">
-                                <CgProfile className="mr-2" />
-                                Your Profile
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/add-scholarship" className="flex items-center">
-                                <IoIosAddCircleOutline className="mr-2" />
-                                Add Scholarship
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/manage-scholarship" className="flex items-center">
-                                <SiSemanticscholar className="mr-2" />
-                                Manage Scholarship
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/manage-applied" className="flex items-center">
-                                <MdFormatShapes className="mr-2" />
-                                Manage Applied Application
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/manage-review" className="flex items-center">
-                                <MdOutlinePreview className="mr-2" />
-                                Manage Review
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/users" className="flex items-center">
-                                <FaUsers className="mr-2" />
-                                Manage Users
-                            </NavLink>
-                        </li>
-                    </>}
+                    {isAdminLoading || isModeratorLoading || isStudentLoading ? (
+                        <SkeletonMenu />
+                    ) : (
+                        <>
+                            {user && isAdmin && !isModerator && (
+                                <>
+                                    <div className="flex justify-center mb-4">
+                                        <img className="object-cover w-16 h-16 rounded-full" src={user?.photoURL} alt="" />
+                                    </div>
+                                    <li>
+                                        <NavLink to="/dashboard/adminProfile" className="flex items-center">
+                                            <CgProfile className="mr-2" />
+                                            Your Profile
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/add-scholarship" className="flex items-center">
+                                            <IoIosAddCircleOutline className="mr-2" />
+                                            Add Scholarship
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/manage-scholarship" className="flex items-center">
+                                            <SiSemanticscholar className="mr-2" />
+                                            Manage Scholarship
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/manage-applied" className="flex items-center">
+                                            <MdFormatShapes className="mr-2" />
+                                            Manage Applied Application
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/manage-review" className="flex items-center">
+                                            <MdOutlinePreview className="mr-2" />
+                                            Manage Review
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/users" className="flex items-center">
+                                            <FaUsers className="mr-2" />
+                                            Manage Users
+                                        </NavLink>
+                                    </li>
+                                </>
+                            )}
 
-                    {user && !isAdmin && isModerator && <>
-                        <div className="flex  justify-center  mb-4">
-                            <img className="object-cover w-16 h-16 rounded-full" src={user?.photoURL} alt="" />
-                        </div>
-                        <li>
-                            <NavLink to="/dashboard/moderatorProfile" className="flex items-center">
-                                <CgProfile className="mr-2" />
-                                Profile
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/add-scholarship" className="flex items-center">
-                                <IoIosAddCircleOutline className="mr-2" />
-                                Add Scholarship
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/manage-scholarship" className="flex items-center">
-                                <SiSemanticscholar className="mr-2" />
-                                Manage Scholarship
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/manage-applied" className="flex items-center">
-                                <MdFormatShapes className="mr-2" />
-                                Manage Applied Application
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/manage-review" className="flex items-center">
-                                <MdOutlinePreview className="mr-2" />
-                                Manage Review
-                            </NavLink>
-                        </li>
-                    </>}
+                            {user && !isAdmin && isModerator && (
+                                <>
+                                    <div className="flex justify-center mb-4">
+                                        <img className="object-cover w-16 h-16 rounded-full" src={user?.photoURL} alt="" />
+                                    </div>
+                                    <li>
+                                        <NavLink to="/dashboard/moderatorProfile" className="flex items-center">
+                                            <CgProfile className="mr-2" />
+                                            Profile
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/add-scholarship" className="flex items-center">
+                                            <IoIosAddCircleOutline className="mr-2" />
+                                            Add Scholarship
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/manage-scholarship" className="flex items-center">
+                                            <SiSemanticscholar className="mr-2" />
+                                            Manage Scholarship
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/manage-applied" className="flex items-center">
+                                            <MdFormatShapes className="mr-2" />
+                                            Manage Applied Application
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/manage-review" className="flex items-center">
+                                            <MdOutlinePreview className="mr-2" />
+                                            Manage Review
+                                        </NavLink>
+                                    </li>
+                                </>
+                            )}
 
-                    {user && isStudent && !isAdmin && !isModerator && <>
-                        <div className="flex  justify-center  mb-4">
-                            <img className="object-cover w-16 h-16 rounded-full" src={user?.photoURL} alt="" />
-                        </div>
-                        <li>
-                            <NavLink to="/dashboard/my-profile" className="flex items-center">
-                                <CgProfile className="mr-2" />
-                                My Profile
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/my-application" className="flex items-center">
-                            <FaWpforms />
-                                My Application
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink to="/dashboard/my-review" className="flex items-center">
-                                <MdRateReview />
-                                My Review
-                            </NavLink>
-                        </li>
-                    </>}
+                            {user && isStudent && !isAdmin && !isModerator && (
+                                <>
+                                    <div className="flex justify-center mb-4">
+                                        <img className="object-cover w-16 h-16 rounded-full" src={user?.photoURL} alt="" />
+                                    </div>
+                                    <li>
+                                        <NavLink to="/dashboard/my-profile" className="flex items-center">
+                                            <CgProfile className="mr-2" />
+                                            My Profile
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/my-application" className="flex items-center">
+                                            <FaWpforms />
+                                            My Application
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/my-review" className="flex items-center">
+                                            <MdRateReview />
+                                            My Review
+                                        </NavLink>
+                                    </li>
+                                </>
+                            )}
+                        </>
+                    )}
                     <div className="divider"></div>
                     <li>
                         <NavLink to="/" className="flex items-center">
@@ -154,7 +189,7 @@ const DashBoard = () => {
                 </div>
                 <Outlet></Outlet>
             </div>
-        </div >
+        </div>
     );
 };
 

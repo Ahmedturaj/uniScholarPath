@@ -6,6 +6,8 @@ import { useQuery } from '@tanstack/react-query';
 import useAxiosSecure from '../../Hooks/useAxiosSecure/useAxiosSecure';
 import { AuthContext } from '../../Provider/AuthProvider';
 import PageTitle from '../../Components/PageTitle/PageTitle';
+import Swal from 'sweetalert2';
+import { ImSpinner9 } from 'react-icons/im';
 
 const ScholarshipApplication = () => {
     const { id } = useParams();
@@ -66,6 +68,7 @@ const ScholarshipApplication = () => {
             serviceCharge,
             applicationFees,
             totalFees,
+            scholarshipName,
             applicationstart,
             applicationDeadline,
             scholarshipPosterEmail: postedUserEmail,
@@ -75,29 +78,28 @@ const ScholarshipApplication = () => {
             applicationDate: new Date(),
             confirmationStatus: 'pending'
         };
-        setLoading(false)
         console.table(applicationData);
-        // try {
-        //     await axiosSecure.post('/applied-scholarships', applicationData);
-        //     Swal.fire({
-        //         icon: 'success',
-        //         title: 'Application Submitted Successfully',
-        //         showConfirmButton: false,
-        //         timer: 1500
-        //     });
-        //     form.reset();
-        //     setImagePreview('');
-        //     setImageText('Upload Image');
-        // } catch (error) {
-        //     console.error("Error submitting application", error);
-        //     Swal.fire({
-        //         icon: 'error',
-        //         title: 'Failed to Submit Application',
-        //         text: error.message,
-        //     });
-        // } finally {
-        //     setLoading(false);
-        // }
+        try {
+            await axiosSecure.post('/applied-scholarships', applicationData);
+            Swal.fire({
+                icon: 'success',
+                title: 'Application Submitted Successfully',
+                showConfirmButton: false,
+                timer: 1500
+            });
+            form.reset();
+            setImagePreview('');
+            setImageText('Upload Image');
+        } catch (error) {
+            console.error("Error submitting application", error);
+            Swal.fire({
+                icon: 'error',
+                title: 'Failed to Submit Application',
+                text: error.message,
+            });
+        } finally {
+            setLoading(false);
+        }
     };
 
 
@@ -203,7 +205,7 @@ const ScholarshipApplication = () => {
                 </div>
                 <div className="text-center col-span-1 md:col-span-2">
                     <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded" disabled={loading}>
-                        {loading ? 'Submitting...' : 'Submit/Apply'}
+                        {loading ?  <ImSpinner9 className='animate-spin m-auto' /> : 'Submit/Apply'}
                     </button>
                 </div>
             </form>

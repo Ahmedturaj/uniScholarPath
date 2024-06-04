@@ -3,9 +3,10 @@ import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure/useAxiosSecure";
 import useUser from "../../../../Hooks/useUsers/useUser";
 import { useState } from "react";
+import { ImSpinner9 } from "react-icons/im";
 
 const ManageUser = () => {
-    const { users, refetch } = useUser();
+    const { users, refetch, isUserLoading } = useUser();
     const axiosSecure = useAxiosSecure();
     const [filterRole, setFilterRole] = useState("");
 
@@ -59,6 +60,10 @@ const ManageUser = () => {
         ? users.filter(user => user.role === filterRole)
         : users;
 
+
+        if (isUserLoading) {
+            return <ImSpinner9 className='animate-spin text-blue-600 text-3xl mt-24 m-auto' />
+        }
     return (
         <div>
             <div className="flex justify-between my-4">

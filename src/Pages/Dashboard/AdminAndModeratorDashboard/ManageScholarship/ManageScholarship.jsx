@@ -9,13 +9,13 @@ import useAxiosSecure from '../../../../Hooks/useAxiosSecure/useAxiosSecure';
 import Swal from 'sweetalert2';
 
 const ManageScholarship = () => {
-    const { scholarships, refetch } = useScolarship();
+    const { scholarships, refetch, isScholarshipLoading } = useScolarship();
     const [selectedScholarship, setSelectedScholarship] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
     const [isViewing, setIsViewing] = useState(false);
     const [loading, setLoading] = useState(false);
     const [imagePreview, setImagePreview] = useState();
-    const axiossecure = useAxiosSecure();
+    const axiosSecure = useAxiosSecure();
 
     const handleEdit = (scholarship) => {
         setSelectedScholarship(scholarship);
@@ -33,17 +33,17 @@ const ManageScholarship = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                axiossecure.delete(`/scholarships/${id}`)
-                .then(res => {
-                    if (res.data.deletedCount > 0) {
-                        refetch();
-                        Swal.fire({
-                            title: "Deleted!",
-                            text: "Your Scholarship has been deleted.",
-                            icon: "success"
-                        });
-                    }
-                })
+                axiosSecure.delete(`/scholarships/${id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            refetch();
+                            Swal.fire({
+                                title: "Deleted!",
+                                text: "Your Scholarship has been deleted.",
+                                icon: "success"
+                            });
+                        }
+                    })
             }
         });
     };
@@ -73,7 +73,7 @@ const ManageScholarship = () => {
         }
         setLoading(false);
         try {
-            await axiossecure.patch(`/scholarships/${selectedScholarship._id}`, updatedScholarship);
+            await axiosSecure.patch(`/scholarships/${selectedScholarship._id}`, updatedScholarship);
             refetch();
             toast.success('Scholarship updated successfully');
             setIsEditing(false);
@@ -100,7 +100,9 @@ const ManageScholarship = () => {
         setSelectedScholarship(scholarship);
         setIsViewing(true);
     };
-
+    if (isScholarshipLoading) {
+        return <ImSpinner9 className='animate-spin text-b m-auto' />
+    }
     return (
         <div className="max-w-7xl mx-auto p-4">
             <PageTitle title={'Manage Scholarships'} />
@@ -175,7 +177,7 @@ const ManageScholarship = () => {
                                         <option value="">Select Subject Category</option>
                                         <option value="Agriculture">Agriculture</option>
                                         <option value="Engineering">Engineering</option>
-                                        <option value="Medical">Medical</option>
+                                        <option value="Doctor">Doctor</option>
                                     </select>
                                 </div>
                                 <div>
