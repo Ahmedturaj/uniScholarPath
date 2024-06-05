@@ -56,6 +56,12 @@ const AppliedTable = ({ scholarship, refetch }) => {
         userName, userEmail, applicationDate, _id
     } = scholarship;
 
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const options = { day: 'numeric', month: 'short', year: 'numeric' };
+        return date.toLocaleDateString('en-GB', options);
+    };
+
     const handleCancel = async (id) => {
         Swal.fire({
             title: "Are you sure?",
@@ -179,12 +185,12 @@ const AppliedTable = ({ scholarship, refetch }) => {
                             <p><strong>Service Charge:</strong> {serviceCharge}</p>
                             <p><strong>Tuition Fees:</strong> {tuitionFees}</p>
                             <p><strong>Total Fees:</strong> {totalFees}</p>
-                            <p><strong>Application Start:</strong> {applicationstart}</p>
-                            <p><strong>Application Deadline:</strong> {applicationDeadline}</p>
+                            <p><strong>Application Start:</strong> {formatDate(applicationstart)}</p>
+                            <p><strong>Application Deadline:</strong> {formatDate(applicationDeadline)}</p>
                             <p><strong>Scholarship Poster Email:</strong> {scholarshipPosterEmail}</p>
                             <p><strong>User Name:</strong> {userName}</p>
                             <p><strong>User Email:</strong> {userEmail}</p>
-                            <p><strong>Application Date:</strong> {applicationDate}</p>
+                            <p><strong>Application Date:</strong> {formatDate(applicationDate)}</p>
                             <p><strong>Confirmation Status:</strong> {confirmationStatus}</p>
                             <p><strong>Phone Number:</strong> {phoneNumber}</p>
                             <p><strong>Photo:</strong> <img src={photo} alt="scholarship" /></p>

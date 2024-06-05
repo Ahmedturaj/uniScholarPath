@@ -4,7 +4,7 @@ const Profile = ({ name, photo, email, role }) => {
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col">
-                <img src={photo} className="max-w-sm rounded-lg shadow-2xl" />
+                <img src={photo} className="w-24 rounded-full shadow-2xl" />
                 <div>
                     <h1 className="text-5xl font-bold">{name}</h1>
                     <p className="py-6">Email: {email}</p>

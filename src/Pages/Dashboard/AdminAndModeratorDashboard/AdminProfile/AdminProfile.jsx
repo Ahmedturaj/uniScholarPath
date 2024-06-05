@@ -12,18 +12,26 @@ const AdminProfile = () => {
     const { data: admin, isLoading } = useQuery({
         queryKey: ['admin-user'],
         queryFn: async () => {
-            const { data } = await axiosSecure.get(`/users/${user?.email}`)
+            const { data } = await axiosSecure.get(`/users/${user?.email}`);
             return data;
         }
-    })
-    console.log(admin);
+    });
+
     return (
-        <div className="flex items-center justify-center">
-            <PageTitle title={'Admin Profile'}></PageTitle>
-            {isLoading ? <div className="animate-pulse mt-24 flex space-x-4 mb-4">
-                
-            <ImSpinner9 className='animate-spin text-2xl text-blue-600 m-auto' />
-            </div> : <Profile photo={admin?.[0].photo} name={admin?.[0].name} email={admin?.[0].email} role={admin?.[0].role}></Profile>}
+        <div className="flex flex-col items-center justify-center min-h-screen p-4 sm:p-6 md:p-8 lg:p-10 xl:p-12">
+            <PageTitle title={'Admin Profile'} />
+            {isLoading ? (
+                <div className="flex flex-col items-center justify-center mt-24 space-y-4">
+                    <ImSpinner9 className="animate-spin text-4xl text-blue-600" />
+                </div>
+            ) : (
+                <Profile 
+                    photo={admin?.[0]?.photo || ''} 
+                    name={admin?.[0]?.name || 'N/A'} 
+                    email={admin?.[0]?.email || 'N/A'} 
+                    role={admin?.[0]?.role || 'N/A'} 
+                />
+            )}
         </div>
     );
 };

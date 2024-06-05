@@ -22,7 +22,7 @@ const MyApplicationTable = ({ myApplied, refetch }) => {
         universityName, scholarshipName, scholarshipCategory, subjectCategory, degree, applicationFees,
         serviceCharge, confirmationStatus, phoneNumber, address, gender, applyingDegree, sscResult,
         hscResult, studyGap, tuitionFees, totalFees, applicationstart, applicationDeadline, scholarshipPosterEmail,
-        userName, userEmail, applicationDate, _id, feedback, scholarshipId
+        userName, userEmail, applicationDate, _id, feedback, scholarshipId, photo
     } = myApplied;
 
     const formatDate = (dateString) => {
@@ -153,6 +153,7 @@ const MyApplicationTable = ({ myApplied, refetch }) => {
         if (reviewRating > 10 || reviewRating <= 0) {
             return toast.error('please rate us in 10 or enter a valid int positive-number')
         }
+        setLoading(true)
         const reviewData = {
             reviewRating: reviewRating,
             reviewDate: form.reviewDate.value,
@@ -160,11 +161,23 @@ const MyApplicationTable = ({ myApplied, refetch }) => {
             scholarshipName: scholarshipName,
             universityName: universityName,
             universityId: scholarshipId,
+            reviewerImage: user?.photoURL,
             reviewer: user?.displayName,
             reviewerEmail: user?.email
 
         }
-        console.log(reviewData);
+        try {
+            const { data } = await axiosSecure.post('/reviews',  reviewData )
+            if (data.insertedId) {
+                setLoading(false);
+                form.reset()
+                toast.success('Thank you. Review have taken.')
+            }
+            closeReviewModal();
+        }
+        catch (error) {
+            toast.error(error.message)
+        }
     }
     return (
         <>
@@ -218,9 +231,21 @@ const MyApplicationTable = ({ myApplied, refetch }) => {
                             <p><strong>Service Charge:</strong> {serviceCharge}</p>
                             <p><strong>Tuition Fees:</strong> {tuitionFees}</p>
                             <p><strong>Total Fees:</strong> {totalFees}</p>
-                            <p><strong>Application Start Date:</strong> {applicationstart}</p>
-                            <p><strong>Application Deadline:</strong> {applicationDeadline}</p>
-                            <p><strong>Application Deadline:</strong> {applicationDate}</p>
+                            <p><strong>Application Start:</strong> {formatDate(applicationstart)}</p>
+                            <p><strong>Application Deadline:</strong> {formatDate(applicationDeadline)}</p>
+                            <p><strong>Scholarship Poster Email:</strong> {scholarshipPosterEmail}</p>
+                            <p><strong>User Name:</strong> {userName}</p>
+                            <p><strong>User Email:</strong> {userEmail}</p>
+                            <p><strong>Application Date:</strong> {formatDate(applicationDate)}</p>
+                            <p><strong>Confirmation Status:</strong> {confirmationStatus}</p>
+                            <p><strong>Phone Number:</strong> {phoneNumber}</p>
+                            <p><strong>Photo:</strong> <img src={photo} alt="scholarship" /></p>
+                            <p><strong>Address:</strong> {address}</p>
+                            <p><strong>Gender:</strong> {gender}</p>
+                            <p><strong>Applying Degree:</strong> {applyingDegree}</p>
+                            <p><strong>SSC Result:</strong> {sscResult}</p>
+                            <p><strong>HSC Result:</strong> {hscResult}</p>
+                            {studyGap != '' && <p><strong>Study Gap:</strong> {studyGap}</p>}
                         </div>
                     </div>
                 </dialog>
@@ -331,25 +356,25 @@ const MyApplicationTable = ({ myApplied, refetch }) => {
 
             {/* review modal */}
             {
-                <dialog id="review_modal" className="modal">
+                isReviewModalOpen && (<dialog id="review_modal" className="modal">
                     <div className="modal-box">
                         <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2" onClick={closeReviewModal}>✕</button>
                         <h2 className='text-xl my-5'>Review the scholarship</h2>
                         <form onSubmit={handleReview}>
                             <div className=" flex gap-3 flex-row">
-                                <input type="number" name='reviewRating' placeholder="give us rate in 10" className="input input-bordered w-full max-w-xs" />
-                                <input defaultValue={new Date().toISOString().split('T')[0]} type="date" name='reviewDate' placeholder="Type here" className="input input-bordered w-full max-w-xs" />
+                                <input type="number" name='reviewRating' placeholder="give us rate in 10" className="input input-bordered w-full max-w-xs" required />
+                                <input defaultValue={new Date().toISOString().split('T')[0]} type="date" name='reviewDate' placeholder="Type here" className="input input-bordered w-full max-w-xs" readOnly />
                             </div>
                             <label className="form-control">
                                 <div className="label">
                                     <span className="label-text">Your Comment</span>
                                 </div>
-                                <textarea name='reviewComment' className="textarea textarea-bordered h-24" placeholder="Comment Please"></textarea>
+                                <textarea name='reviewComment' className="textarea textarea-bordered h-24" placeholder="Comment Please" required></textarea>
                             </label>
                             <input type="submit" value='Review' className='btn btn-primary btn-block text-center my-5' />
                         </form>
                     </div>
-                </dialog>
+                </dialog>)
             }
 
         </>

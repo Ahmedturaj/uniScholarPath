@@ -1,10 +1,10 @@
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { CgProfile } from "react-icons/cg";
 import { FaBars, FaEnvelope, FaHome, FaUsers, FaWpforms, } from "react-icons/fa";
 import { IoIosAddCircleOutline } from "react-icons/io";
 import { MdFormatShapes, MdOutlinePreview, MdRateReview } from "react-icons/md";
 import { SiSemanticscholar } from "react-icons/si";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { AuthContext } from "../../Provider/AuthProvider";
 import useAdmin from "../../Hooks/useAdmin/useAdmin";
 import useModerator from "../../Hooks/useModerator/useModerator";
@@ -39,10 +39,16 @@ const DashBoard = () => {
     const { isModerator, isModeratorLoading } = useModerator();
     const { isStudent, isStudentLoading } = useStudent();
     const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+    const location = useLocation();
 
     const toggleSidebar = () => {
         setIsSidebarOpen(!isSidebarOpen);
     };
+
+    // Close sidebar when navigating to a new page
+    useEffect(() => {
+        setIsSidebarOpen(false);
+    }, [location]);
 
     return (
         <div className="flex min-h-full">
@@ -187,7 +193,7 @@ const DashBoard = () => {
                         <FaBars size={24} />
                     </button>
                 </div>
-                <Outlet></Outlet>
+                <Outlet />
             </div>
         </div>
     );
