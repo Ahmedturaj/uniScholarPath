@@ -1,13 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import useAxiosSecure from "../useAxiosSecure/useAxiosSecure";
-
-
+import useAxiosCommon from "../Common/useAxiosCommon";
 const useReviews = () => {
-    const axiosSecure = useAxiosSecure()
+    const axiosCommon = useAxiosCommon()
     const { data: reviews = [], isLoading: isReviewLoading, refetch } = useQuery({
         queryKey: ['reviews'],
         queryFn: async () => {
-            const { data } = await axiosSecure.get('/reviews')
+            const { data } = await axiosCommon.get('/reviews')
             return data;
         }
     })

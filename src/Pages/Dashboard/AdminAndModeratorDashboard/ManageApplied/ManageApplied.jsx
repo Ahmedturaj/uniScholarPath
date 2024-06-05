@@ -34,9 +34,9 @@ const ManageApplied = () => {
                 isAppliedScholarship ? (
                     <ImSpinner9 className='animate-spin text-blue-600 text-3xl mt-24 m-auto' />
                 ) : (
-                    <div className="max-w-4xl mx-auto p-4">
+                    <div className="lg:max-w-4xl md:max-w-2xl max-w-[360px] mx-auto p-4">
                         <PageTitle title={'Manage Applied Scholarships'} />
-                        <div className="flex justify-between items-center mb-4">
+                        <div className="flex flex-col md:flex-row justify-between items-center mb-4">
                             <h2 className="text-2xl font-bold">All Applied Scholarships</h2>
                             <select 
                                 className="p-2 border border-gray-300 rounded-md"

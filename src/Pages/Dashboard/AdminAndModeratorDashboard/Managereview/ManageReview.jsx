@@ -53,14 +53,14 @@ const ManageReview = () => {
             {isReviewLoading ? <div className="flex items-center justify-center my-32">
                 <ImSpinner9 className='animate-spin text-blue-600 font-bold text-4xl m-auto' />
             </div> : <>
-                <div className="flex items-center justify-center w-full">
+                <div data-aos="flip-up" data-aos-duration="1000" className="flex items-center justify-center w-full">
                     <h2 className="text-2xl border-t-2 rounded-es-xl rounded-se-xl border-blue-500 border-b-2 py-3 text-center w-80 font-extrabold text-blue-500 bg-black bg-opacity-15 mb-14">
                         All reviews
                     </h2>
                 </div>
                 <div className="grid gap-6 grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
                     {
-                        reviews.map(review => <div key={review._id} className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
+                        reviews.map(review => <div data-aos="zoom-in-up" data-aos-duration="1000" key={review._id} className="w-full max-w-sm overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800">
                             <img className="object-cover object-center w-full h-56" src={review.reviewerImage} alt="avatar" />
 
                             <div className="flex items-center px-6 py-3 bg-gray-900">

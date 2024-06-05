@@ -187,7 +187,7 @@ const DashBoard = () => {
             </div>
 
             {/* Dashboard content */}
-            <div className="flex-1 p-8 min-h-full md:min-h-screen">
+            <div className="flex-1 p-8 lg:max-w-4xl md:max-w-2xl max-w-[360px] m-auto">
                 <div className="lg:hidden fixed top-0 right-0 p-4 z-10">
                     <button onClick={toggleSidebar}>
                         <FaBars size={24} />
