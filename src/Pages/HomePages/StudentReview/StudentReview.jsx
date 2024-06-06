@@ -12,15 +12,15 @@ const StudentReview = () => {
     };
 
     // Sort the reviews by reviewDate in descending order
-    const sortedReviews = [...reviews].sort((a, b) => new Date(b.reviewDate) - new Date(a.reviewDate));
+    const sortedReviews = [...reviews].slice().sort((a, b) => new Date(b.reviewDate) - new Date(a.reviewDate));
 
     // Get the latest three reviews
-    const latestReviews = sortedReviews.slice(0, 3);
+    const latestReviews = sortedReviews.slice(0, 6);
 
     return (
-        <div className="">
+        <div className="text-black">
             <div data-aos='zoom-in-up' data-aos-duration='1000' className="text-center w-11/12 m-auto">
-                <h1 className="mb-10 text-center">Our students have shared their experiences and feedback about the scholarship program. These reviews provide valuable insights into how the scholarship has impacted their educational journey and personal growth. Read on to discover what they have to say about the support, opportunities, and overall experience provided by our scholarship program.</h1>
+                <h1 className="mb-10 text-gray-400 text-center">Our students have shared their experiences and feedback about the scholarship program. These reviews provide valuable insights into how the scholarship has impacted their educational journey and personal growth. Read on to discover what they have to say about the support, opportunities, and overall experience provided by our scholarship program.</h1>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:max-w-6xl w-11/12 mx-auto">
                 {latestReviews.map((review) => (

@@ -8,6 +8,7 @@ import { RiEmotionHappyFill } from "react-icons/ri";
 import { Link, useLoaderData } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
 import { GiVibratingBall } from "react-icons/gi";
+import PageTitle from "../../Components/PageTitle/PageTitle";
 
 const ViewDetail = () => {
     const data = useLoaderData();
@@ -35,7 +36,8 @@ const ViewDetail = () => {
     };
 
     return (
-        <div className="w-full overflow-hidden bg-black bg-opacity-70 rounded-lg shadow-md">
+        <div className="w-full overflow-hidden bg-blue-300 bg-opacity-50 rounded-lg shadow-md">
+            <PageTitle title={`detail of ${scholarshipName}`}></PageTitle>
             <img
                 className="object-cover w-full h-64"
                 src={universityLogo}
@@ -44,62 +46,62 @@ const ViewDetail = () => {
             <div className="p-6">
                 <div>
                     <span className="text-xs font-medium text-blue-600 uppercase dark:text-blue-400">{formatDate(postDate)}</span>
-                    <h2 className="block mt-2 text-xl font-semibold text-white transition-colors duration-300 transform hover:text-blue-600 hover:underline">
+                    <h2 className="block mt-2 text-xl font-semibold text-black transition-colors duration-300 transform hover:text-blue-600 hover:underline">
                         {scholarshipName}
                     </h2>
                     <h2 className="text-xl my-2 text-blue-500">{universityName}</h2>
-                    <div className="flex gap-3 items-center">
-                        <p className="flex items-center justify-center gap-2 text-gray-400">
+                    <div className="flex flex-col md:flex-row gap-3 items-center">
+                        <p className="flex items-center justify-center gap-2 ">
                             <span className="text-blue-400">Location:</span>{universityCountry} <FaLocationDot />
                         </p>
-                        <p className="flex text-gray-400 items-center justify-center gap-2">
+                        <p className="flex  items-center justify-center gap-2">
                             <span className="text-blue-400">City:</span>{universityCity} <FaCity />
                         </p>
                     </div>
-                    <div className="flex gap-3 items-center">
-                        <p className="flex items-center justify-center gap-2 text-gray-400">
+                    <div className="flex flex-col md:flex-row gap-3 items-center">
+                        <p className="flex items-center justify-center gap-2 ">
                             <span className="text-blue-400">Subject Category:</span>{subjectCategory} <FaBookOpen />
                         </p>
-                        <p className="flex text-gray-400 items-center justify-center gap-2">
+                        <p className="flex items-center justify-center gap-2">
                             <span className="text-blue-400">Degree:</span>{degree} <FaPersonChalkboard />
                         </p>
                     </div>
-                    <div className="flex gap-3 items-center">
-                        <p className="flex items-center justify-center gap-2 text-gray-400">
+                    <div className="flex flex-col md:flex-row gap-3 items-center">
+                        <p className="flex items-center justify-center gap-2">
                             <span className="text-blue-400">Scholarship Category:</span>{scholarshipCategory} <MdOutlineCategory />
                         </p>
                         {tuitionFees !== 0 ? (
-                            <p className="flex text-gray-400 items-center justify-center gap-2">
+                            <p className="flex items-center justify-center gap-2">
                                 <span className="text-blue-400">Tuition Fees:</span>{tuitionFees} <RiEmotionHappyFill />
                             </p>
                         ) : (
-                            <p className="flex text-gray-400 items-center justify-center gap-2">
+                            <p className="flex items-center justify-center gap-2">
                                 <span className="text-blue-400">Tuition Fees:</span>Full Funded <ImHappy2 />
                             </p>
                         )}
                     </div>
-                    <div className="flex gap-3 items-center">
-                        <p className="flex items-center justify-center gap-2 text-gray-400">
+                    <div className="flex flex-col md:flex-row gap-3 items-center">
+                        <p className="flex items-center justify-center gap-2 ">
                             <span className="text-blue-400">Application Start:</span>{formatDate(applicationstart)} <FaHourglassStart />
                         </p>
-                        <p className="flex text-gray-400 items-center justify-center gap-2">
+                        <p className="flex  items-center justify-center gap-2">
                             <span className="text-blue-400">Application Deadline:</span>{formatDate(applicationDeadline)} <FaHourglassEnd />
                         </p>
                     </div>
-                    <div className="flex gap-3 items-center">
-                        <p className="flex items-center justify-center gap-2 text-gray-400">
+                    <div className="flex flex-col md:flex-row gap-3 items-center">
+                        <p className="flex items-center justify-center gap-2 ">
                             <span className="text-blue-400">Application Fees:</span>{applicationFees} <FaDollarSign />
                         </p>
-                        <p className="flex items-center justify-center gap-2 text-gray-400">
+                        <p className="flex items-center justify-center gap-2 ">
                             <span className="text-blue-400">Service Charge:</span>{serviceCharge} <FaSackDollar />
                         </p>
                     </div>
-                    <div className="flex items-center gap-2">
-                        <Link to={`/payment/${_id}`} className="btn bg-blue-500 border-none my-5">
-                            Total Fees
+                    <div className="flex flex-row items-center gap-2">
+                        <Link to={`/payment/${_id}`} className=" border-blue-500 border-2 p-2 rounded-se-3xl rounded-es-3xl hover:rounded-s-3xl my-5">
+                            <span className="text-blue-500">Total Fees</span>
                             <div className="badge badge-secondary gap-2">{totalFees} <FaSackDollar /></div>
                         </Link>
-                        <p className="flex text-white items-center gap-2">
+                        <p className="flex items-center gap-2">
                             <GoMoveToStart className="text-4xl animate-bounce text-blue-400" />  Click To Apply
                         </p>
                     </div>
@@ -115,9 +117,9 @@ const ViewDetail = () => {
                             <div className="carousel w-full">
                                 {reviews.map((review, index) => (
                                     <div key={review._id} id={`slide${index}`} className="carousel-item relative w-full">
-                                        <div className="w-full px-8 py-4 bg-white rounded-lg shadow-md dark:bg-gray-800">
+                                        <div className="w-full px-8 py-4 rounded-lg shadow-md bg-opacity-55 bg-gray-800">
                                             <div className="flex items-center justify-between">
-                                                <span className="text-sm font-light text-gray-600 dark:text-gray-400">{formatDate(review.reviewDate)}</span>
+                                                <span className="text-sm font-light text-gray-700 dark:text-gray-300">{formatDate(review.reviewDate)}</span>
                                                 <button className="px-3 py-1 text-sm font-bold text-gray-100 transition-colors duration-300 transform bg-gray-600 rounded cursor-pointer hover:bg-gray-500 flex gap-2">
                                                     <span className="flex gap-2"><GiVibratingBall className="text-blue-500 text-xl" /> Rating point:</span>{review.reviewRating}
                                                 </button>

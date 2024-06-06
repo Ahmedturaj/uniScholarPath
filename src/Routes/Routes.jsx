@@ -20,6 +20,9 @@ import ErrorPage from "../Pages/ErrorPage/ErrorPage";
 import ViewDetail from "../Pages/ViewDetail/ViewDetail";
 import Payment from "../Pages/Payment/Payment";
 import ScholarshipApplication from "../Pages/ScholarshipApplication/ScholarshipApplication";
+import AdminRoutes from "./AdminRoutes/AdminRoutes";
+import AdminModeratorRoutes from "./AminModeratorRoutes/AdminModeratorRoutes";
+import StudentRoutes from "./StudentRoutes/StudentRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -43,7 +46,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/scholarship-application/:id',
-                element: <ScholarshipApplication></ScholarshipApplication>
+                element: <PrivateRoutes><ScholarshipApplication></ScholarshipApplication></PrivateRoutes>
             },
             {
                 path: '/signIn',
@@ -63,47 +66,47 @@ export const router = createBrowserRouter([
             // admin paths
             {
                 path: 'adminProfile',
-                element: <AdminProfile></AdminProfile>
+                element: <AdminRoutes><AdminProfile></AdminProfile></AdminRoutes>
             },
             {
                 path: 'users',
-                element: <ManageUser></ManageUser>
+                element: <AdminRoutes><ManageUser></ManageUser></AdminRoutes>
             },
             {
                 path: 'add-scholarship',
-                element: <AddScholarship></AddScholarship>
+                element: <AdminModeratorRoutes><AddScholarship></AddScholarship></AdminModeratorRoutes>
             },
             {
                 path: 'manage-scholarship',
-                element: <ManageScholarship></ManageScholarship>
+                element: <AdminModeratorRoutes><ManageScholarship></ManageScholarship></AdminModeratorRoutes>
             },
             {
                 path: 'manage-applied',
-                element: <ManageApplied></ManageApplied>
+                element: <AdminModeratorRoutes><ManageApplied></ManageApplied></AdminModeratorRoutes>
             },
             {
                 path: 'manage-review',
-                element: <ManageReview></ManageReview>
+                element: <AdminModeratorRoutes><ManageReview></ManageReview></AdminModeratorRoutes>
             },
 
             // moderator
             {
                 path: 'moderatorProfile',
-                element: <ModeratorProfile></ModeratorProfile>
+                element: <AdminModeratorRoutes><ModeratorProfile></ModeratorProfile></AdminModeratorRoutes>
             },
 
             // student
             {
                 path: 'my-profile',
-                element: <MyProfile></MyProfile>
+                element: <StudentRoutes><MyProfile></MyProfile></StudentRoutes>
             },
             {
                 path: 'my-application',
-                element: <MyApplication></MyApplication>
+                element: <StudentRoutes><MyApplication></MyApplication></StudentRoutes>
             },
             {
                 path: 'my-review',
-                element: <MyReview></MyReview>
+                element: <StudentRoutes><MyReview></MyReview></StudentRoutes>
             }
         ]
     }

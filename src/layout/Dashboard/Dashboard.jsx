@@ -51,7 +51,7 @@ const DashBoard = () => {
     }, [location]);
 
     return (
-        <div className="flex min-h-full">
+        <div className="flex max-w-7xl min-h-full">
             {/* Sidebar */}
             <div
                 className={`fixed top-0 left-0 w-64 min-h-full md:min-h-screen bg-blue-700 text-white transform ${isSidebarOpen ? 'translate-x-0 z-50' : '-translate-x-full'} transition-transform duration-300 lg:translate-x-0 lg:relative lg:flex-shrink-0`}
@@ -69,7 +69,7 @@ const DashBoard = () => {
                                     <li>
                                         <NavLink to="/dashboard/adminProfile" className="flex items-center">
                                             <CgProfile className="mr-2" />
-                                            Your Profile
+                                            Profile
                                         </NavLink>
                                     </li>
                                     <li>
@@ -81,7 +81,7 @@ const DashBoard = () => {
                                     <li>
                                         <NavLink to="/dashboard/manage-scholarship" className="flex items-center">
                                             <SiSemanticscholar className="mr-2" />
-                                            Manage Scholarship
+                                            Manage Scholarships
                                         </NavLink>
                                     </li>
                                     <li>
@@ -93,7 +93,7 @@ const DashBoard = () => {
                                     <li>
                                         <NavLink to="/dashboard/manage-review" className="flex items-center">
                                             <MdOutlinePreview className="mr-2" />
-                                            Manage Review
+                                            All Reviews
                                         </NavLink>
                                     </li>
                                     <li>
@@ -125,7 +125,7 @@ const DashBoard = () => {
                                     <li>
                                         <NavLink to="/dashboard/manage-scholarship" className="flex items-center">
                                             <SiSemanticscholar className="mr-2" />
-                                            Manage Scholarship
+                                            Manage Scholarships
                                         </NavLink>
                                     </li>
                                     <li>
@@ -137,7 +137,7 @@ const DashBoard = () => {
                                     <li>
                                         <NavLink to="/dashboard/manage-review" className="flex items-center">
                                             <MdOutlinePreview className="mr-2" />
-                                            Manage Review
+                                            Manage Reviews
                                         </NavLink>
                                     </li>
                                 </>

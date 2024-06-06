@@ -3,6 +3,7 @@ import { FaRankingStar } from "react-icons/fa6";
 import useScolarship from "../../Hooks/useScolarship/useScolarship";
 import { FaDollarSign } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import PageTitle from '../../Components/PageTitle/PageTitle';
 
 const AllScholarship = () => {
     const { scholarships } = useScolarship();
@@ -37,6 +38,7 @@ const AllScholarship = () => {
 
     return (
         <div className="max-w-7xl mx-auto p-4">
+            <PageTitle title={'All Scholarships'} />
             <div className="mb-4">
                 <input
                     type="text"
@@ -72,16 +74,16 @@ const AllScholarship = () => {
                                         Rank: {scholarship.universityRank}<FaRankingStar />
                                     </p>
                                 </div>
-                                {scholarship.tuitionFees != 0 ?  <p className="mt-1 text-sm flex gap-1">
-                                 Tuition Fees: {scholarship.tuitionFees}<FaDollarSign />
-                            </p>: <p className="mt-1 text-sm flex gap-1">
-                                 Tuition Fees: Fully Funded <FaDollarSign />
-                            </p>}
+                                {scholarship.tuitionFees != 0 ? <p className="mt-1 text-sm flex gap-1">
+                                    Tuition Fees: {scholarship.tuitionFees}<FaDollarSign />
+                                </p> : <p className="mt-1 text-sm flex gap-1">
+                                    Tuition Fees: Fully Funded <FaDollarSign />
+                                </p>}
                             </div>
                             <img className="object-cover w-full h-48 mt-2" src={scholarship.universityLogo} alt="University Logo" />
                             <div className="flex gap-2 items-center justify-between px-4 py-2 bg-gray-900">
                                 <h1 className="text-lg font-bold text-white">ApplicationFees: ${scholarship.applicationFees}</h1>
-                                <Link to={`/detail/${scholarship._id}`} className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">
+                                <Link to={`/detail/${scholarship._id}`} className="px-2 py-1 text-xs font-semibold border-2 border-blue-600 rounded-se-3xl text-blue-600 uppercase transition-colors duration-300 transform bg-white rounded-es-3xl hover:rounded-s-3xl hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">
                                     Details
                                 </Link>
                             </div>

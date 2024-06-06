@@ -19,7 +19,7 @@ const MyProfile = () => {
 
     return (
         <div className="flex items-center justify-center">
-            <PageTitle title={`${user?.displayName}`}></PageTitle>
+            <PageTitle title={`Student ~ ${user?.displayName}`}></PageTitle>
             <Profile photo={student?.[0].photo} name={student?.[0].name} email={student?.[0].email} role={student?.[0].role}></Profile>
         </div>
     );

@@ -127,14 +127,14 @@ const ScholarshipApplication = () => {
                 <ImSpinner9 className='animate-spin text-blue-600 font-bold text-4xl m-auto' />
             </div>
 
-                : <div className="mt-14">
+                : <div className="my-14">
                     <PageTitle title={'Scholarship Application'} />
-                    <div className="flex items-center justify-center w-full">
+                    <div data-aos='zoom-in' data-aos-duration='1000' className="flex items-center justify-center w-full">
                         <h2 className="text-2xl border-t-2 rounded-es-xl rounded-se-xl border-blue-500 border-b-2 py-3 text-center w-80 font-extrabold text-blue-500 bg-black bg-opacity-15">
                             Applying for {scholarshipName}
                         </h2>
                     </div>
-                    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mt-8 p-4 border rounded-lg grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <form onSubmit={handleSubmit} className="max-w-2xl mx-auto mt-8 p-4 border-2 border-blue-500 rounded-se-3xl rounded-es-3xl grid grid-cols-1 md:grid-cols-2 gap-4">
                         <div className="mb-4">
                             <label className="block text-gray-700">Phone Number</label>
                             <input type="number" name="phoneNumber" className="w-full px-3 py-2 border rounded" required />
@@ -208,7 +208,7 @@ const ScholarshipApplication = () => {
                             <input type="text" value={degree} readOnly className="w-full px-3 py-2 border rounded bg-gray-200" />
                         </div>
                         <div className="text-center col-span-1 md:col-span-2">
-                            <button type="submit" className="px-4 py-2 bg-blue-500 text-white rounded" disabled={loading}>
+                            <button type="submit" className="px-4 py-2 border-2 border-blue-500 text-blue-500 duration-700 rounded-se-3xl rounded-es-3xl hover:rounded-s-3xl" disabled={loading}>
                                 {loading ? <ImSpinner9 className='animate-spin m-auto' /> : 'Submit/Apply'}
                             </button>
                         </div>

@@ -1,9 +1,10 @@
-import { FaTrashAlt} from "react-icons/fa";
+import { FaTrashAlt } from "react-icons/fa";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../../Hooks/useAxiosSecure/useAxiosSecure";
 import useUser from "../../../../Hooks/useUsers/useUser";
 import { useState } from "react";
 import { ImSpinner9 } from "react-icons/im";
+import PageTitle from "../../../../Components/PageTitle/PageTitle";
 
 const ManageUser = () => {
     const { users, refetch, isUserLoading } = useUser();
@@ -61,11 +62,12 @@ const ManageUser = () => {
         : users;
 
 
-        if (isUserLoading) {
-            return <ImSpinner9 className='animate-spin text-blue-600 text-3xl mt-24 m-auto' />
-        }
+    if (isUserLoading) {
+        return <ImSpinner9 className='animate-spin text-blue-600 text-3xl mt-24 m-auto' />
+    }
     return (
         <div>
+            <PageTitle title={'ManageUsers'}></PageTitle>
             <div className="flex justify-between my-4">
                 <h2 className="text-3xl">All Users</h2>
                 <h2 className="text-3xl">Total Users: {filteredUsers.length}</h2>

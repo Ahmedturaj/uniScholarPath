@@ -64,7 +64,7 @@ const Payment = () => {
                     Payment for {paymentData.scholarshipName}
                 </h2>
             </div>
-            <div className=" w-11/12 mx-auto flex items-center md:justify-between gap-2 flex-col md:flex-row">
+            <div className="bg-slate-600 bg-opacity-60 p-4 mt-10 rounded-3xl w-11/12 mx-auto flex items-center md:justify-between gap-2 flex-col md:flex-row">
                 <div className="border-2 border-blue-400 p-4 bg-blue-200 rounded-se-3xl rounded-es-3xl">
                     <h2 className="text-xl">Tuition Fees: ${tuitionFeesFloat}</h2>
                     <h2 className="text-xl">Service Charge: ${serviceChargeFloat}</h2>

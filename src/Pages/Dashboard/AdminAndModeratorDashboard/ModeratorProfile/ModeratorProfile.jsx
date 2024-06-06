@@ -19,7 +19,7 @@ const ModeratorProfile = () => {
 
     return (
         <div className="flex items-center justify-center">
-            <PageTitle title={`${user?.displayName}`}></PageTitle>
+            <PageTitle title={`moderator ~ ${user?.displayName}`}></PageTitle>
             <Profile photo={moderator?.[0].photo} name={moderator?.[0].name} email={moderator?.[0].email} role={moderator?.[0].role}></Profile>
         </div>
     );

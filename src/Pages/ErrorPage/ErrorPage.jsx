@@ -1,6 +1,7 @@
 import { useNavigate, useRouteError } from "react-router-dom";
 import errorImage from "../../assets/error.gif";
 import "./ErrorPage.css";
+import PageTitle from "../../Components/PageTitle/PageTitle";
 
   
 
@@ -12,6 +13,7 @@ const ErrorPage = () => {
   };
     return (
         <div className="error-area">
+          <PageTitle title={'Error'}></PageTitle>
         <div>
           <img src={errorImage} alt="Error Image" />
           <p className="error-text">{error.statusText || error.message}</p>

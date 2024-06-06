@@ -104,8 +104,8 @@ function SignUp() {
                     </div>
 
                     <div className="mt-6">
-                        <button className="w-full px-6 py-3 text-sm font-medium tracking-wide  capitalize transition-colors duration-300 transform bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 text-white">
-                            {loading ? <ImSpinner9 className='animate-spin m-auto text-white' /> : 'Sign Up'}
+                        <button className="w-full px-6 py-3 text-sm font-medium tracking-wide  capitalize transition-colors duration-300 transform border-2 rounded-se-3xl rounded-es-3xl border-blue-600 hover:rounded-s-3xl  focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50 text-blue-500">
+                            {loading ? <ImSpinner9 className='animate-spin m-auto text-blue-500' /> : 'Sign Up'}
                         </button>
                     </div>
                 </form>

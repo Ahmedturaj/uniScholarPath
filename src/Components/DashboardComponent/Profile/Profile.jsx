@@ -2,7 +2,7 @@ import PropTypes from 'prop-types';
 
 const Profile = ({ name, photo, email, role }) => {
     return (
-        <div className="hero min-h-screen bg-base-200">
+        <div data-aos="zoom-in-right" data-aos-duration="1000" className="hero min-h-screen">
             <div className="hero-content flex-col">
                 <img src={photo} className="w-24 rounded-full shadow-2xl" />
                 <div>
