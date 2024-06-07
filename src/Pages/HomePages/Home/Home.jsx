@@ -4,7 +4,7 @@ import Banner from "../Banner/Banner";
 import TopScholarships from "../TopScholarships/TopScholarships";
 import { FaEye } from "react-icons/fa6";
 import StudentReview from "../StudentReview/StudentReview";
-import ContactUs from "../ContuctUs/ContactUs";
+import SpeakToRepresentative from "../SpeakToRepresentative/SpeakToRepresentative";
 
 const Home = () => {
     return (
@@ -34,7 +34,7 @@ const Home = () => {
             {/* ----------- */}
 
             <div className="mt-20">
-                <ContactUs></ContactUs>
+                <SpeakToRepresentative></SpeakToRepresentative>
             </div>
 
             <div className="mt-20">

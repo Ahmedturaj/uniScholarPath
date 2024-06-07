@@ -14,7 +14,7 @@ const ViewDetail = () => {
     const data = useLoaderData();
     const axiosSecure = useAxiosSecure();
     const { universityName, universityLogo, universityCountry, universityCity, tuitionFees, subjectCategory, serviceCharge, _id, scholarshipName, scholarshipCategory, postDate, degree, applicationstart, applicationFees, applicationDeadline, } = data;
-
+    console.log(universityLogo);
     const { data: reviews = [] } = useQuery({
         queryKey: ['review'],
         queryFn: async () => {

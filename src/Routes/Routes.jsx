@@ -23,6 +23,7 @@ import ScholarshipApplication from "../Pages/ScholarshipApplication/ScholarshipA
 import AdminRoutes from "./AdminRoutes/AdminRoutes";
 import AdminModeratorRoutes from "./AminModeratorRoutes/AdminModeratorRoutes";
 import StudentRoutes from "./StudentRoutes/StudentRoutes";
+import RequestMessage from "../Pages/Dashboard/AdminAndModeratorDashboard/RequestMessage/RequestMessage";
 
 export const router = createBrowserRouter([
     {
@@ -38,7 +39,7 @@ export const router = createBrowserRouter([
             {
                 path: '/detail/:id',
                 element: <PrivateRoutes><ViewDetail></ViewDetail></PrivateRoutes>,
-                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/scholarships/${params.id}`, { credentials: 'include' })
+                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/scholarships/${params.id}`)
             },
             {
                 path: '/payment/:id',
@@ -88,7 +89,10 @@ export const router = createBrowserRouter([
                 path: 'manage-review',
                 element: <AdminModeratorRoutes><ManageReview></ManageReview></AdminModeratorRoutes>
             },
-
+            {
+                path: 'requestMessage',
+                element: <AdminModeratorRoutes><RequestMessage></RequestMessage></AdminModeratorRoutes>
+            },
             // moderator
             {
                 path: 'moderatorProfile',

@@ -74,7 +74,7 @@ const AppliedTable = ({ scholarship, refetch }) => {
         }).then(async (result) => {
             if (result.isConfirmed) {
                 try {
-                    await axiosSecure.put(`/applied-scholarships/${id}`, { confirmationStatus: 'rejected' });
+                    await axiosSecure.put(`/applied-scholarships-status/${id}`, { confirmationStatus: 'rejected' });
                     refetch()
                     Swal.fire({
                         title: "Cancelled!",

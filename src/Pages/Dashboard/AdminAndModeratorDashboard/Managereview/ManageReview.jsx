@@ -70,13 +70,13 @@ const ManageReview = () => {
                             <div className="flex items-center px-6 py-3 bg-gray-900">
                                 <BsPersonBadgeFill className="text-blue-400" />
 
-                                <h1 className="mx-3 text-lg font-semibold">{review.reviewer}</h1>
+                                <h1 className="mx-3 text-lg text-white font-semibold">{review.reviewer}</h1>
                             </div>
 
                             <div className="px-6 py-4">
                                 <h1 className="text-xl font-semibold">{review.universityName}</h1>
 
-                                <p className="py-2 text-gray-700 dark:text-gray-400"><span className="text-blue-500">Review</span> : {review.reviewComment}</p>
+                                <p className="py-2"><span className="text-blue-500">Review</span> : {review.reviewComment}</p>
 
                                 <div className="flex items-center mt-4">
                                     <h3 className="flex gap-2"><GiVibratingBall className="text-blue-500 text-xl" /> Rating point:</h3>

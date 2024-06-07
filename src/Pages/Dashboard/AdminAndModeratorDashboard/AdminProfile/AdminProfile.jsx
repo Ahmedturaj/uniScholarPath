@@ -31,7 +31,7 @@ const AdminProfile = () => {
 
     const barChartData = [
         { name: 'Messages', value: messages.length },
-        { name: 'Scholarships', value: scholarships.length },
+        { name: 'Scholar', value: scholarships.length },
         { name: 'Applied', value: appliedScholarship.length },
         { name: 'Reviews', value: reviews.length },
     ];

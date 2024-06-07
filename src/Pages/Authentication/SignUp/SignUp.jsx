@@ -8,6 +8,7 @@ import useAxiosCommon from '../../../Hooks/Common/useAxiosCommon';
 import SocialLogIn from '../../../Components/SocialLogIn/SocialLogIn';
 import { useContext } from 'react';
 import { AuthContext } from '../../../Provider/AuthProvider';
+import PageTitle from '../../../Components/PageTitle/PageTitle';
 
 
 
@@ -50,7 +51,7 @@ function SignUp() {
 
             await createUser(email, password);
             await updateUserProfile(name, data.data.display_url);
-            const usersInfo = { name: name, email: email, photo: data.data.display_url, role:'user'};
+            const usersInfo = { name: name, email: email, photo: data.data.display_url, role: 'user' };
             const { data: users } = await axiosCommon.post('/users', usersInfo);
             if (users.insertedId) {
                 navigate('/');
@@ -64,6 +65,7 @@ function SignUp() {
     };
     return (
         <div className="my-10 flex w-full max-w-sm mx-auto overflow-hidden   lg:max-w-4xl">
+            <PageTitle title={'SignUp'} />
             <div className="hidden bg-cover lg:block lg:w-1/2" style={{ backgroundImage: `url(${logInImg})` }}></div>
 
             <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
@@ -97,8 +99,8 @@ function SignUp() {
                         <input name='email' className="block w-full px-4 py-2 border rounded-lg focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" type="email" />
                     </div>
                     <div className="mt-4">
-                            <label className="block mb-2 text-sm font-medium">Password</label>
-                      
+                        <label className="block mb-2 text-sm font-medium">Password</label>
+
 
                         <input name='password' className="block w-full px-4 py-2  border rounded-lg focus:border-blue-400 focus:ring-opacity-40 focus:outline-none focus:ring focus:ring-blue-300" type="password" />
                     </div>

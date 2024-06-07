@@ -102,6 +102,12 @@ const DashBoard = () => {
                                             Manage Users
                                         </NavLink>
                                     </li>
+                                    <li>
+                                        <NavLink to="/dashboard/requestMessage" className="flex items-center">
+                                            <FaUsers className="mr-2" />
+                                            Request Scholarship
+                                        </NavLink>
+                                    </li>
                                 </>
                             )}
 
@@ -138,6 +144,12 @@ const DashBoard = () => {
                                         <NavLink to="/dashboard/manage-review" className="flex items-center">
                                             <MdOutlinePreview className="mr-2" />
                                             Manage Reviews
+                                        </NavLink>
+                                    </li>
+                                    <li>
+                                        <NavLink to="/dashboard/requestMessage" className="flex items-center">
+                                            <FaUsers className="mr-2" />
+                                            Request Scholarship
                                         </NavLink>
                                     </li>
                                 </>
