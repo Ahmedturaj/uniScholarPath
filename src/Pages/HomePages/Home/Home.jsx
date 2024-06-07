@@ -5,6 +5,8 @@ import TopScholarships from "../TopScholarships/TopScholarships";
 import { FaEye } from "react-icons/fa6";
 import StudentReview from "../StudentReview/StudentReview";
 import SpeakToRepresentative from "../SpeakToRepresentative/SpeakToRepresentative";
+import ContactUs from "../ContuctUs/ContactUs";
+import FAQFile from "../FAQFile/FAQFile";
 
 const Home = () => {
     return (
@@ -36,7 +38,9 @@ const Home = () => {
             <div className="mt-20">
                 <SpeakToRepresentative></SpeakToRepresentative>
             </div>
-
+            <div className=" my-24">
+                <ContactUs></ContactUs>
+            </div>
             <div className="mt-20">
                 <div data-aos="zoom-in-up" data-aos-duration="900" className="flex items-center justify-center w-full">
                     <h2 className="text-2xl border-t-2 rounded-es-xl rounded-se-xl border-blue-500 border-b-2 py-3 text-center w-80 font-extrabold text-blue-500 bg-black bg-opacity-15">
@@ -46,6 +50,10 @@ const Home = () => {
                 <div className="my-10">
                     <StudentReview />
                 </div>
+            </div>
+            {/* FAQ */}
+            <div className="my-24">
+                <FAQFile></FAQFile>
             </div>
         </section>
     );

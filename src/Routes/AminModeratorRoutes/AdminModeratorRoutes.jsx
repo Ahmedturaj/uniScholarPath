@@ -1,6 +1,6 @@
 
 import PropTypes from 'prop-types';
-import { Navigate, useLocation } from 'react-router-dom';
+import { Navigate, useLocation, useNavigate } from 'react-router-dom';
 import useAdmin from '../../Hooks/useAdmin/useAdmin';
 import { AuthContext } from '../../Provider/AuthProvider';
 import { useContext } from 'react';
@@ -14,11 +14,15 @@ const AdminModeratorRoutes = ({ children }) => {
     const { isModerator, isModeratorLoading } = useModerator();
     const { isAdmin, isAdminLoading } = useAdmin();
     const location = useLocation();
+    const navigate = useNavigate();
 
     if (loading || isAdminLoading || isModeratorLoading) {
         return <div className="flex items-center justify-center my-32">
             <ImSpinner9 className='animate-spin text-blue-600 font-bold text-4xl m-auto' />
         </div>
+    }
+    if (isStudent) {
+        return (navigate('/'))
     }
 
     if (user && !isStudent && isAdmin || isModerator) {

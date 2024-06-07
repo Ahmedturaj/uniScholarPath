@@ -24,6 +24,7 @@ import AdminRoutes from "./AdminRoutes/AdminRoutes";
 import AdminModeratorRoutes from "./AminModeratorRoutes/AdminModeratorRoutes";
 import StudentRoutes from "./StudentRoutes/StudentRoutes";
 import RequestMessage from "../Pages/Dashboard/AdminAndModeratorDashboard/RequestMessage/RequestMessage";
+import ModeratorRoutes from "./ModeratorRoutes/ModeratorRoutes";
 
 export const router = createBrowserRouter([
     {
@@ -39,7 +40,7 @@ export const router = createBrowserRouter([
             {
                 path: '/detail/:id',
                 element: <PrivateRoutes><ViewDetail></ViewDetail></PrivateRoutes>,
-                loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/scholarships/${params.id}`)
+                // loader: ({ params }) => fetch(`${import.meta.env.VITE_API_URL}/scholarships/${params.id}`)
             },
             {
                 path: '/payment/:id',
@@ -96,7 +97,7 @@ export const router = createBrowserRouter([
             // moderator
             {
                 path: 'moderatorProfile',
-                element: <AdminModeratorRoutes><ModeratorProfile></ModeratorProfile></AdminModeratorRoutes>
+                element: <ModeratorRoutes><ModeratorProfile></ModeratorProfile></ModeratorRoutes>
             },
 
             // student

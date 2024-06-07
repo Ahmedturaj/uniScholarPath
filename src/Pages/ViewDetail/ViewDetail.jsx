@@ -5,16 +5,24 @@ import { GoMoveToStart } from "react-icons/go";
 import { ImHappy2 } from "react-icons/im";
 import { MdOutlineCategory } from "react-icons/md";
 import { RiEmotionHappyFill } from "react-icons/ri";
-import { Link, useLoaderData } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useAxiosSecure from "../../Hooks/useAxiosSecure/useAxiosSecure";
 import { GiVibratingBall } from "react-icons/gi";
 import PageTitle from "../../Components/PageTitle/PageTitle";
 
 const ViewDetail = () => {
-    const data = useLoaderData();
     const axiosSecure = useAxiosSecure();
+    const { id } = useParams();
+    const { data = {} } = useQuery({
+        queryKey: ['scholarship'],
+        queryFn: async () => {
+            const { data } = await axiosSecure.get(`/scholarships/${id}`)
+            return data
+        }
+    })
     const { universityName, universityLogo, universityCountry, universityCity, tuitionFees, subjectCategory, serviceCharge, _id, scholarshipName, scholarshipCategory, postDate, degree, applicationstart, applicationFees, applicationDeadline, } = data;
-    console.log(universityLogo);
+
+
     const { data: reviews = [] } = useQuery({
         queryKey: ['review'],
         queryFn: async () => {
