@@ -10,17 +10,17 @@ import FAQFile from "../FAQFile/FAQFile";
 
 const Home = () => {
     return (
-        <section className="container mx-auto">
+        <section className="max-w-[1270px] mx-auto">
             <PageTitle title={'Home'}></PageTitle>
             <div className="relative -top-[96px] md:-top-[250px] lg:-top-[99px]"> <Banner></Banner></div>
-            {/* ------------- */}
-            <div className="container mx-auto">
+          
+            <div className="max-w-[1270px] mx-auto">
                 <div data-aos="zoom-in-up" data-aos-duration="1000" className="flex items-center justify-center w-full">
                     <h2 className="text-2xl border-t-2 rounded-es-xl rounded-se-xl border-blue-500 border-b-2 py-3 text-center w-80 font-extrabold text-blue-500 bg-black bg-opacity-15">
                         Top Scholarships
                     </h2>
                 </div>
-                <div className="md:max-w-6xl mx-auto">
+                <div className="md:max-w-6xl  mx-auto">
                     <TopScholarships></TopScholarships>
 
                     <div className="w-full flex items-center justify-center">
@@ -33,7 +33,7 @@ const Home = () => {
 
                 </div>
             </div>
-            {/* ----------- */}
+          
 
             <div className="mt-20">
                 <SpeakToRepresentative></SpeakToRepresentative>
@@ -51,7 +51,7 @@ const Home = () => {
                     <StudentReview />
                 </div>
             </div>
-            {/* FAQ */}
+            
             <div className="my-24">
                 <FAQFile></FAQFile>
             </div>

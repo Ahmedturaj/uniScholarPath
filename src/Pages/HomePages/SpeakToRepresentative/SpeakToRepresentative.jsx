@@ -71,11 +71,11 @@ const SpeakToRepresentative = () => {
                         glareEnable={true}
                         glareMaxOpacity={0.45}
                         scale={1.02} >
-                        <img data-aos="zoom-in-right" data-aos-duration="1000" style={bounceStyle} src={contactPhoto} className='w-full' alt="" />
+                        <img data-aos="zoom-in-up" data-aos-duration="1000" style={bounceStyle} src={contactPhoto} className='w-full' alt="" />
                     </Tilt>
                 </div>
                 <div className="flex-1">
-                    <div data-aos="zoom-in-left" data-aos-duration="1000" className="container flex flex-col gap-y-6 items-center justify-center min-h-screen px-6 mx-auto border-2 border-blue-400 rounded-se-3xl rounded-es-3xl">
+                    <div data-aos="zoom-in-up" data-aos-duration="1000" className="container flex flex-col gap-y-6 items-center justify-center min-h-screen px-6 mx-auto border-2 border-blue-400 rounded-se-3xl rounded-es-3xl">
                         <h2 data-aos="zoom-in-up" data-aos-duration="1000" className='md:text-2xl font-bold mb-12 text-blue-600 text-center'>Message</h2>
                         <form onSubmit={handleMessage} className="w-full max-w-md">
                             <input type="text" placeholder="Your Name" defaultValue={user?.displayName} name='name' className="input input-bordered input-primary w-full mb-5" required />

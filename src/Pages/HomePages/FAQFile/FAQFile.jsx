@@ -25,7 +25,7 @@ const FAQFile = () => {
                 </h2>
             </div>
             <div className='flex flex-col md:flex-row justify-between items-center gap-6 w-11/12 mx-auto'>
-                <div data-aos="zoom-in-left" data-aos-duration="900" className="w-full md:w-6/12">
+                <div data-aos="zoom-in-down" data-aos-duration="900" className="w-full md:w-6/12">
                     <style>
                         {keyframes}
                     </style>
@@ -35,7 +35,7 @@ const FAQFile = () => {
                         glareMaxOpacity={0.45}
                         scale={1.02}><img src={FAQPoster} style={bounceStyle} className='rounded-3xl w-full' /></Tilt>
                 </div>
-                <div data-aos="zoom-in-right" data-aos-duration="900" className="w-full  md:w-6/12">
+                <div  className="w-full  md:w-6/12">
                     <div className="collapse collapse-arrow bg-blue-300 mb-5 bg-opacity-55">
                         <input type="radio" name="my-accordion-2" defaultChecked />
                         <div className="collapse-title text-xl font-medium">

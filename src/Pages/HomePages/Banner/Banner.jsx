@@ -17,7 +17,7 @@ const Banner = () => {
     }, []);
 
     return (
-        <div className='w-full container mx-auto'>
+        <div className=''>
             <div className="carousel w-full relative">
                 <div id="slide1" className="carousel-item relative w-full">
                     <video ref={videoRefs[0]} src={video1} className='lg:h-[715px]' loop muted></video>

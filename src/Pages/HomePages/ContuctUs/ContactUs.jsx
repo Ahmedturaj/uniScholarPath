@@ -27,8 +27,8 @@ const ContactUs = () => {
                     <p data-aos="zoom-in-up" data-aos-duration='850' className="mt-3 text-gray-500 dark:text-gray-400">Our friendly team is always here to chat.</p>
                 </div>
 
-                <div className="grid grid-cols-1 gap-12 mt-10 md:grid-cols-2 lg:grid-cols-3">
-                    <div data-aos="zoom-in-right" data-aos-duration='1000' className="flex flex-col items-center justify-center text-center">
+                <div className="grid grid-cols-1 gap-12 mt-10 sm:grid-cols-2 lg:grid-cols-3">
+                    <div data-aos="zoom-in-down" data-aos-duration='1000' className="flex flex-col items-center justify-center text-center">
                         <span className="p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
                             <AiOutlineMail className="w-6 h-6" />
                         </span>
@@ -48,7 +48,7 @@ const ContactUs = () => {
                         <p className="mt-2 text-blue-500 dark:text-blue-400">100 Smith Street Collingwood VIC 3066 AU</p>
                     </div>
 
-                    <div data-aos="zoom-in-left" data-aos-duration='1000' className="flex flex-col items-center justify-center text-center">
+                    <div data-aos="zoom-in-down" data-aos-duration='1000' className="flex flex-col items-center justify-center text-center">
                         <span className="p-3 text-blue-500 rounded-full bg-blue-100/80 dark:bg-gray-800">
                             <AiOutlinePhone className="w-6 h-6" />
                         </span>

@@ -8,7 +8,7 @@ const Main = () => {
     const noHeaderFooter = location.pathname.includes('signIn') || location.pathname.includes('signUp');
     console.log(location.pathname);
     return (
-        <div className="max-w-[1260px]">
+        <div className="max-w-[1270px]">
             {noHeaderFooter || <NavBar/>}
             <div className='pt-24 min-h-[calc(100vh-68px)]'>
                 <Outlet />
