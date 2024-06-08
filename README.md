@@ -24,7 +24,7 @@ Explore UniScholarPath live: [UniScholarPath Live Site](https://unischolarpath.w
 - **Type Checking:** PropTypes for runtime type checking, enhancing reliability.
 - **Alerts and Toasts:** Utilize SweetAlert2 for beautiful pop-up modals and toast notifications.
 - **Database Management:** Firebase for backend services, including hosting and database management.
-
+- **Additional Features:**  404 Not Found page for invalid routes.Comprehensive admin and moderator dashboards for efficient management.User-friendly application process with clear instructions and feedback. Implement Axios interceptor. Implement a price based filtering system on All Scholarship route.
 ## Technologies Used
 
 - [React Router](https://reactrouter.com/en/main/start/tutorial) - For client-side routing
@@ -36,14 +36,13 @@ Explore UniScholarPath live: [UniScholarPath Live Site](https://unischolarpath.w
 - [DaisyUI](https://daisyui.com/) - For additional Tailwind CSS components
 - [Mixkit](https://mixkit.co/) - For royalty-free music and sound effects
 - [react-simple-typewriter](https://www.npmjs.com/package/react-simple-typewriter) - For a simple typewriter effect
-- [react-awesome-reveal](https://www.npmjs.com/package/react-awesome-reveal?activeTab=readme#example) - For animated reveal effects
+- [react-aos](https://michalsnik.github.io/aos/) - For animated  effects
 
 - [Tailwind CSS](https://tailwindcss.com/)
 - [DaisyUI](https://daisyui.com/)
 - [Axios](https://axios-http.com/docs/intro)
 - [React Icons](https://react-icons.github.io/react-icons/search/#q=person)
 - [React Router Dom](https://reactrouter.com/en/main)
-- [React CountUp](https://www.npmjs.com/package/react-countup)
 - [SweetAlert2](https://sweetalert2.github.io/)
 - [React Helmet Async](https://www.npmjs.com/package/react-helmet-async)
 - [React Tilt](https://www.npmjs.com/package/react-tilt)
@@ -51,20 +50,20 @@ Explore UniScholarPath live: [UniScholarPath Live Site](https://unischolarpath.w
 
 ## .env.local
 ### frontend
-VITE_APIKEY= Your firebase APIKEY
-VITE_AUTHDOMAIN= Your firebase AUTHDOMAIN
-VITE_PROJECTID= Your firebase PROJECTID
-VITE_STORAGEBUCKET= Your firebase STORAGEBUCKET
-VITE_MESSAGINGSENDERID= Your firebase MESSAGINGSENDERID
-VITE_APPID= Your firebase APPID
-VITE_API_URL= server api link
-VITE_IMAGEBB_API_API=API key from imageBB
-VITE_PAYMENT_GATEWAY_PK=PK key from stripe
+- VITE_APIKEY=  Your firebase APIKEY
+- VITE_AUTHDOMAIN= Your firebase AUTHDOMAIN
+- VITE_PROJECTID= Your firebase PROJECTID
+- _VITE_STORAGEBUCKET= Your firebase STORAGEBUCKET
+- VITE_MESSAGINGSENDERID= Your firebase MESSAGINGSENDERID
+- VITE_APPID= Your firebase APPID
+- VITE_API_URL= server api link
+- VITE_IMAGEBB_API_API= API key from imageBB
+- VITE_PAYMENT_GATEWAY_PK= PK key from stripe
 ### backend
-DB_USER= mongodb user name
-DB_PASS= password
-ACCESS_TOKEN_SECRET=your access token 
-STRIPE_SECRET_KEY= Your Stripe secret key
+- DB_USER= mongodb user name
+- DB_PASS= password
+- ACCESS_TOKEN_SECRET=your access token 
+- STRIPE_SECRET_KEY= Your Stripe secret key
 
 # React + Vite
 
