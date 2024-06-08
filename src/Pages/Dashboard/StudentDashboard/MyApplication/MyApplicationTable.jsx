@@ -22,7 +22,7 @@ const MyApplicationTable = ({ myApplied, refetch }) => {
         universityName, scholarshipName, scholarshipCategory, subjectCategory, degree, applicationFees,
         serviceCharge, confirmationStatus, phoneNumber, address, gender, applyingDegree, sscResult,
         hscResult, studyGap, tuitionFees, totalFees, applicationstart, applicationDeadline, scholarshipPosterEmail,
-        userName, userEmail, applicationDate, _id, feedback, scholarshipId, photo
+        userName, userEmail, applicationDate, _id, feedback, photo
     } = myApplied;
 
     const formatDate = (dateString) => {
@@ -158,16 +158,16 @@ const MyApplicationTable = ({ myApplied, refetch }) => {
             reviewRating: reviewRating,
             reviewDate: form.reviewDate.value,
             reviewComment: form.reviewComment.value,
-            scholarshipName: scholarshipName,
-            universityName: universityName,
-            universityId: scholarshipId,
+            scholarshipName: selectedScholarship.scholarshipName,
+            universityName: selectedScholarship.universityName,
+            universityId: selectedScholarship.scholarshipId,
             reviewerImage: user?.photoURL,
             reviewer: user?.displayName,
             reviewerEmail: user?.email
 
         }
         try {
-            const { data } = await axiosSecure.post('/reviews',  reviewData )
+            const { data } = await axiosSecure.post('/reviews', reviewData)
             if (data.insertedId) {
                 setLoading(false);
                 form.reset()

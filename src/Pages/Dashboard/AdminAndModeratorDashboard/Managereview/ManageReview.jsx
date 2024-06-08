@@ -47,8 +47,8 @@ const ManageReview = () => {
         });
     }
 
-    if (!reviews) {
-        <h2>No Reviews have added yet..</h2>
+    if (reviews.length <= 0) {
+        return <h2 className="text-center text-2xl">No Reviews have added yet..</h2>
     }
     return (
         <>

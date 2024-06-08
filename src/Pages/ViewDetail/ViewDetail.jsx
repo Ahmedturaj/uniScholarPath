@@ -2,7 +2,7 @@ import { useQuery } from "@tanstack/react-query";
 import { FaBookOpen, FaDollarSign } from "react-icons/fa";
 import { FaCity, FaHourglassEnd, FaHourglassStart, FaLocationDot, FaPersonChalkboard, FaSackDollar } from "react-icons/fa6";
 import { GoMoveToStart } from "react-icons/go";
-import { ImHappy2 } from "react-icons/im";
+import { ImHappy2, ImSpinner9 } from "react-icons/im";
 import { MdOutlineCategory } from "react-icons/md";
 import { RiEmotionHappyFill } from "react-icons/ri";
 import { Link, useParams } from "react-router-dom";
@@ -23,10 +23,10 @@ const ViewDetail = () => {
     const { universityName, universityLogo, universityCountry, universityCity, tuitionFees, subjectCategory, serviceCharge, _id, scholarshipName, scholarshipCategory, postDate, degree, applicationstart, applicationFees, applicationDeadline, } = data;
 
 
-    const { data: reviews = [] } = useQuery({
+    const { data: reviews = [], isLoading: isReviewLoading } = useQuery({
         queryKey: ['review'],
         queryFn: async () => {
-            const { data } = await axiosSecure.get(`/reviews/${_id}`)
+            const { data } = await axiosSecure.get(`/reviews/${id}`)
             return data;
         }
     });
@@ -120,8 +120,12 @@ const ViewDetail = () => {
                             Reviews {reviews.length}
                         </h2>
                     </div>
-                    {
-                        reviews.length != 0 ? <div className="flex items-center">
+                    {isReviewLoading ? (
+                        <div className="flex flex-col items-center justify-center mt-24 space-y-4">
+                            <ImSpinner9 className="animate-spin text-4xl text-blue-600" />
+                        </div>
+                    ) : reviews.length !== 0 ? (
+                        <div className="flex items-center">
                             <div className="carousel w-full">
                                 {reviews.map((review, index) => (
                                     <div key={review._id} id={`slide${index}`} className="carousel-item relative w-full">
@@ -132,16 +136,14 @@ const ViewDetail = () => {
                                                     <span className="flex gap-2"><GiVibratingBall className="text-blue-500 text-xl" /> Rating point:</span>{review.reviewRating}
                                                 </button>
                                             </div>
-
                                             <div className="mt-2">
                                                 <a href="#" className="text-xl font-bold text-gray-700 dark:text-white hover:text-gray-600 dark:hover:text-gray-200 hover:underline">
                                                     {review.universityName}
                                                 </a>
                                                 <p className="mt-2 text-gray-600 dark:text-gray-300">
-                                                    <span className="text-blue-500">Review Comment </span> : {review.reviewComment}
+                                                    <span className="text-blue-500">Review Comment</span>: {review.reviewComment}
                                                 </p>
                                             </div>
-
                                             <div className="flex items-center justify-between mt-4">
                                                 <div className="flex items-center">
                                                     <img className="hidden object-cover w-10 h-10 mx-4 rounded-full sm:block" src={review.reviewerImage} alt="Reviewer" />
@@ -151,7 +153,6 @@ const ViewDetail = () => {
                                                 </div>
                                             </div>
                                         </div>
-
                                         <div className="absolute flex justify-between transform -translate-y-1/2 left-5 right-5 top-1/2">
                                             <a href={`#slide${index - 1 >= 0 ? index - 1 : reviews.length - 1}`} className="text-blue-600">❮</a>
                                             <a href={`#slide${index + 1 < reviews.length ? index + 1 : 0}`} className="text-blue-600">❯</a>
@@ -159,13 +160,14 @@ const ViewDetail = () => {
                                     </div>
                                 ))}
                             </div>
-                        </div> :
-                            <div className="text-center">
-                                <h2 className="text-center text-blue-500 md:text-2xl">
-                                    No review Added yet
-                                </h2>
-                            </div>
-                    }
+                        </div>
+                    ) : (
+                        <div className="text-center">
+                            <h2 className="text-center text-blue-500 md:text-2xl">
+                                No review Added yet
+                            </h2>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
