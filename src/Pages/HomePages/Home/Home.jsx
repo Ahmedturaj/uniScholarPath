@@ -10,7 +10,7 @@ import FAQFile from "../FAQFile/FAQFile";
 
 const Home = () => {
     return (
-        <section>
+        <section className="container mx-auto">
             <PageTitle title={'Home'}></PageTitle>
             <div className="relative -top-[96px] md:-top-[250px] lg:-top-[99px]"> <Banner></Banner></div>
             {/* ------------- */}
